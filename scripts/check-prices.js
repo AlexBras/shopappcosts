@@ -26,34 +26,39 @@ function toLines(html) {
     .replace(/<!--[\s\S]*?-->/g, " ")
     .replace(/<(br|hr)\b[^>]*>/gi, "\n")
     .replace(/<\/(p|div|li|h[1-6]|tr|td|th|section|article|header|footer|dt|dd|button|span)>/gi, "\n")
-    .replace(/<[^>]+>/g, " ")
+    /* A tag can contain ">" inside a quoted attribute (data-action="click->x#y"): skip quoted values. */
+    .replace(/<[a-zA-Z\/!](?:"[^"]*"|'[^']*'|[^'">])*>/g, " ")
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
     .replace(/&#(\d+);/g, (_, d) => String.fromCodePoint(+d))
     .replace(/&([a-z]+);/gi, (m, n) => ENT[n.toLowerCase()] ?? m);
   return t.split("\n").map(l => l.replace(/\s+/g, " ").trim()).filter(Boolean);
 }
 
-/* Lines that are about prices: plan names, amounts, limits. Volatile counters (reviews, ratings) are dropped. */
-const VOLATILE = /\b(reviews?|rating|rated|installs?|stars?)\b|\(\d[\d,]*\)/i;
+/* Shopify App Store listings put every plan between "Choose the plan that best fits your business."
+   and "All charges are billed in USD..." (then "See all pricing options"). We keep that block.
+   Pages without it (an app with no paid plan) fall back to price-like lines only.
+   Rating numbers and review counts are dropped so they never trigger a false alert. */
+const VOLATILE = /^\d(\.\d)?$|\(\d{1,3}(,\d{3})*\)|\b\d[\d,]* reviews?\b|\bout of 5\b/i;
+const START = /^choose the plan that best fits your business\.?$/i;
+const END = /^(see all pricing options|all charges are billed\b.*)$/i;
 function pricingSection(lines) {
-  const money = l => /\$\s?\d|\bfree\b|\/\s?(month|mo|year)\b|\bper (month|order|email)\b/i.test(l);
-  /* Choose the "Pricing" heading followed by the most price-like lines. */
-  let best = -1, bestScore = 0;
-  lines.forEach((l, i) => {
-    if (!/^pricing( plans?)?$/i.test(l)) return;
-    const score = lines.slice(i + 1, i + 80).filter(money).length;
-    if (score > bestScore) { best = i; bestScore = score; }
-  });
   let out;
-  if (best >= 0) {
-    let end = lines.findIndex((l, i) => i > best + 3 && /^(reviews|support|more apps like this|featured in|you might also like|frequently asked questions|faq)\b/i.test(l));
-    if (end < 0 || end - best > 250) end = best + 150;
-    out = lines.slice(best + 1, end);
+  const s = lines.findIndex(l => START.test(l));
+  if (s >= 0) {
+    let e = -1;
+    for (let i = s + 1; i < Math.min(lines.length, s + 400); i++) {
+      if (/^see all pricing options$/i.test(lines[i])) { e = i; break; }
+      if (/^all charges are billed\b/i.test(lines[i])) e = i + 1; /* keep going: "See all pricing options" may follow */
+      else if (e >= 0) break;
+    }
+    if (e < 0) e = Math.min(lines.length, s + 250);
+    out = lines.slice(s, e);
   } else {
-    out = lines.filter(money); /* vendor pages without a "Pricing" heading */
+    const price = l => /\$\s?\d|^free$|\bfree (plan|for|forever)\b|\/\s?(month|mo|year)\b|\bper (month|order|email|1,?000)\b|\bup to \d[\d,]* (languages?|orders|contacts|subscriptions|words|emails)\b/i.test(l);
+    out = lines.filter(price);
   }
   out = out.filter(l => !VOLATILE.test(l) && l.length <= 300);
-  return [...new Set(out)].slice(0, 120);
+  return [...new Set(out)].slice(0, 150);
 }
 
 /* ---------- main ---------- */

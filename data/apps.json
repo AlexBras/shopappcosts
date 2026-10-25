@@ -1,144 +1,389 @@
 [
   {
-    "id": "judgeme", "slug": "judge-me", "name": "Judge.me Product Reviews", "short": "Judge.me", "cat": "reviews",
-    "rating": "5.0 · 48,894 reviews", "listing": "https://apps.shopify.com/judgeme", "checked": "2026-10-26",
+    "id": "judgeme",
+    "slug": "judge-me",
+    "name": "Judge.me Product Reviews",
+    "short": "Judge.me",
+    "cat": "reviews",
+    "rating": "5.0 · 48,894 reviews",
+    "listing": "https://apps.shopify.com/judgeme",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Unlimited review requests, photo and video reviews" },
-      { "name": "Awesome", "price": 15, "limits": "Adds 130+ integrations (Klaviyo, Gorgias), AI replies and summaries, Google Shopping and Meta sync. 15-day trial" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Unlimited review requests, photo and video reviews"
+      },
+      {
+        "name": "Awesome",
+        "price": 15,
+        "limits": "Adds 130+ integrations (Klaviyo, Gorgias), AI replies and summaries, Google Shopping and Meta sync. 15-day trial"
+      }
     ],
     "verdict": "Best value: the free plan already covers unlimited requests, and Awesome is a flat $15 whatever your volume.",
     "watch": null,
     "source": "Shopify App Store listing; Judge.me help center (updated 11 Sep 2026)",
-    "affiliate": { "status": "to-contact", "program": null, "url": null }
+    "affiliate": {
+      "status": "to-contact",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "loox", "slug": "loox", "name": "Loox Product Reviews", "short": "Loox", "cat": "reviews",
-    "rating": "4.9 · 9,965 reviews", "listing": "https://apps.shopify.com/loox", "checked": "2026-10-26",
+    "id": "loox",
+    "slug": "loox",
+    "name": "Loox Product Reviews",
+    "short": "Loox",
+    "cat": "reviews",
+    "rating": "4.9 · 9,965 reviews",
+    "listing": "https://apps.shopify.com/loox",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Up to 500 orders" },
-      { "name": "Convert", "price": 49.99, "limits": "300 orders included, then $50 per additional 300 orders. 14-day trial" },
-      { "name": "Unlimited", "price": 299.99, "limits": "Unlimited orders, priority support" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 500 orders"
+      },
+      {
+        "name": "Convert",
+        "price": 49.99,
+        "limits": "300 orders included, then $50 per additional 300 orders. 14-day trial"
+      },
+      {
+        "name": "Unlimited",
+        "price": 299.99,
+        "limits": "Unlimited orders, priority support"
+      }
     ],
     "verdict": "Strong on photo and video reviews. On Convert, the bill climbs with every 300 orders: compare with Unlimited above about 1,800 orders.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "program", "program": "Loox partner program (rate not published)", "url": null }
+    "affiliate": {
+      "status": "program",
+      "program": "Loox partner program (rate not published)",
+      "url": null
+    }
   },
   {
-    "id": "yotpo", "slug": "yotpo", "name": "Yotpo Product Reviews", "short": "Yotpo", "cat": "reviews",
-    "rating": "4.8 · 4,637 reviews", "listing": "https://apps.shopify.com/yotpo", "checked": "2026-10-26",
+    "id": "yotpo",
+    "slug": "yotpo",
+    "name": "Yotpo Product Reviews",
+    "short": "Yotpo",
+    "cat": "reviews",
+    "rating": "4.8 · 4,637 reviews",
+    "listing": "https://apps.shopify.com/yotpo",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Up to 50 orders per month" },
-      { "name": "Starter", "price": 15, "from": true, "limits": "Price varies with order volume. $144/year option" },
-      { "name": "Pro", "price": 119, "from": true, "limits": "Adds Google Seller Rating, AI summary. $1,068/year option" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 50 orders per month"
+      },
+      {
+        "name": "Starter",
+        "price": 15,
+        "from": true,
+        "limits": "Price varies with order volume. $144/year option"
+      },
+      {
+        "name": "Pro",
+        "price": 119,
+        "from": true,
+        "limits": "Adds Google Seller Rating, AI summary. $1,068/year option"
+      }
     ],
     "verdict": "The free plan stops at 50 orders. Paid plans scale with volume, but the listing does not publish the rates.",
     "watch": "Yotpo may bill some charges outside your Shopify invoice.",
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "to-contact", "program": null, "url": null }
+    "affiliate": {
+      "status": "to-contact",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "klaviyo", "slug": "klaviyo", "name": "Klaviyo", "short": "Klaviyo", "cat": "email",
-    "rating": "4.7 · 3,410 reviews", "listing": "https://apps.shopify.com/klaviyo-email-marketing", "checked": "2026-10-26",
+    "id": "klaviyo",
+    "slug": "klaviyo",
+    "name": "Klaviyo",
+    "short": "Klaviyo",
+    "cat": "email",
+    "rating": "4.7 · 3,410 reviews",
+    "listing": "https://apps.shopify.com/klaviyo-email-marketing",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Up to 250 active profiles, 500 emails per month" },
-      { "name": "Email", "price": 20, "from": true, "limits": "251 to 500 contacts; price rises with your list" },
-      { "name": "SMS", "price": 15, "limits": "Up to 1,250 SMS/MMS credits" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 250 active profiles, 500 emails per month"
+      },
+      {
+        "name": "Email",
+        "price": 20,
+        "from": true,
+        "limits": "251 to 500 contacts; price rises with your list"
+      },
+      {
+        "name": "SMS",
+        "price": 15,
+        "limits": "Up to 1,250 SMS/MMS credits"
+      }
     ],
     "verdict": "The reference for automated flows. The listing publishes prices only up to 500 contacts.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "program", "program": "Klaviyo partner program (rate not published)", "url": null }
+    "affiliate": {
+      "status": "program",
+      "program": "Klaviyo partner program (rate not published)",
+      "url": null
+    }
   },
   {
-    "id": "omnisend", "slug": "omnisend", "name": "Omnisend", "short": "Omnisend", "cat": "email",
-    "rating": "", "listing": "https://www.omnisend.com/pricing/", "checked": "2026-10-26",
+    "id": "omnisend",
+    "slug": "omnisend",
+    "name": "Omnisend",
+    "short": "Omnisend",
+    "cat": "email",
+    "rating": "",
+    "listing": "https://apps.shopify.com/omnisend",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "250 contacts, 500 emails per month" },
-      { "name": "Standard", "price": 16, "from": true, "limits": "Emails = contacts × 12 per cycle; no SMS" },
-      { "name": "Pro", "price": 59, "from": true, "limits": "Unlimited emails (fair use); SMS sold separately since 4 May 2026" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "250 contacts, 500 emails per month"
+      },
+      {
+        "name": "Standard",
+        "price": 16,
+        "from": true,
+        "limits": "Emails = contacts × 12 per cycle; no SMS"
+      },
+      {
+        "name": "Pro",
+        "price": 59,
+        "from": true,
+        "limits": "Unlimited emails (fair use); SMS sold separately since 4 May 2026"
+      }
     ],
     "verdict": "Cheaper entry than Klaviyo for email-only stores. Since May 2026, SMS is no longer bundled.",
     "watch": "Legacy Pro SMS credits end on 26 October 2026.",
-    "source": "Omnisend help center, “Omnisend pricing plans 2026”",
-    "affiliate": { "status": "program", "program": "Impact: 20% recurring for 24 months", "url": null }
+    "source": "Omnisend help center, “Omnisend pricing plans 2026”; Shopify App Store listing",
+    "affiliate": {
+      "status": "program",
+      "program": "Impact: 20% recurring for 24 months",
+      "url": null
+    }
   },
   {
-    "id": "shopifyemail", "slug": "shopify-email", "name": "Shopify Email", "short": "Shopify Email", "cat": "email",
-    "rating": "4.7 · 3,154 reviews", "listing": "https://apps.shopify.com/shopify-email", "checked": "2026-10-26",
+    "id": "shopifyemail",
+    "slug": "shopify-email",
+    "name": "Shopify Email",
+    "short": "Shopify Email",
+    "cat": "email",
+    "rating": "4.7 · 3,154 reviews",
+    "listing": "https://apps.shopify.com/shopify-email",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Included", "price": 0, "limits": "First 10,000 emails each month" },
-      { "name": "Usage", "price": 1, "from": true, "priceLabel": "$1 / 1k", "limits": "From $1 per 1,000 extra emails" }
+      {
+        "name": "Included",
+        "price": 0,
+        "limits": "First 10,000 emails each month"
+      },
+      {
+        "name": "Usage",
+        "price": 1,
+        "from": true,
+        "priceLabel": "$1 / 1k",
+        "limits": "From $1 per 1,000 extra emails"
+      }
     ],
     "verdict": "Cheapest for simple newsletters. Pricing is by email sent, not by contact.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "none", "program": null, "url": null }
+    "affiliate": {
+      "status": "none",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "recharge", "slug": "recharge", "name": "Recharge Subscriptions", "short": "Recharge", "cat": "subscriptions",
-    "rating": "4.8 · 3,146 reviews", "listing": "https://apps.shopify.com/subscription-payments", "checked": "2026-10-26",
+    "id": "recharge",
+    "slug": "recharge",
+    "name": "Recharge Subscriptions",
+    "short": "Recharge",
+    "cat": "subscriptions",
+    "rating": "4.8 · 3,146 reviews",
+    "listing": "https://apps.shopify.com/subscription-payments",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Entry plan", "price": 25, "limits": "No transaction fee for the first 50 subscribers" },
-      { "name": "Starter", "price": 99, "limits": "+ 1.49% + $0.19 per transaction. 60-day trial" },
-      { "name": "Plus", "price": 499, "limits": "+ 1.34% + $0.19 per transaction" }
+      {
+        "name": "Entry plan",
+        "price": 25,
+        "limits": "No transaction fee for the first 50 subscribers"
+      },
+      {
+        "name": "Starter",
+        "price": 99,
+        "limits": "+ 1.49% + $0.19 per transaction. 60-day trial"
+      },
+      {
+        "name": "Plus",
+        "price": 499,
+        "limits": "+ 1.34% + $0.19 per transaction"
+      }
     ],
     "verdict": "Built for scale, priced for it: the per-renewal fee is the real cost once you pass 50 subscribers.",
     "watch": "The listing does not name the $25 entry plan.",
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "to-contact", "program": null, "url": null }
+    "affiliate": {
+      "status": "to-contact",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "seal", "slug": "seal-subscriptions", "name": "Seal Subscriptions", "short": "Seal", "cat": "subscriptions",
-    "rating": "4.9 · 3,155 reviews", "listing": "https://apps.shopify.com/seal-subscriptions", "checked": "2026-10-26",
+    "id": "seal",
+    "slug": "seal-subscriptions",
+    "name": "Seal Subscriptions",
+    "short": "Seal",
+    "cat": "subscriptions",
+    "rating": "4.9 · 3,155 reviews",
+    "listing": "https://apps.shopify.com/seal-subscriptions",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Up to 50 subscriptions" },
-      { "name": "Paid", "price": 5.95, "limits": "Up to 100 subscriptions" },
-      { "name": "Rising Star", "price": 9.95, "limits": "Up to 250 subscriptions" },
-      { "name": "Legend", "price": 24.95, "limits": "Up to 500 subscriptions" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 50 subscriptions"
+      },
+      {
+        "name": "Paid",
+        "price": 5.95,
+        "limits": "Up to 100 subscriptions"
+      },
+      {
+        "name": "Rising Star",
+        "price": 9.95,
+        "limits": "Up to 250 subscriptions"
+      },
+      {
+        "name": "Legend",
+        "price": 24.95,
+        "limits": "Up to 500 subscriptions"
+      }
     ],
     "verdict": "No transaction fee on any plan and unlimited revenue: hard to beat under 500 subscribers.",
     "watch": "Plans above 500 subscriptions exist, but the listing does not publish their prices.",
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "to-contact", "program": null, "url": null }
+    "affiliate": {
+      "status": "to-contact",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "weglot", "slug": "weglot", "name": "Weglot", "short": "Weglot", "cat": "translation",
-    "rating": "4.5 · 828 reviews", "listing": "https://apps.shopify.com/weglot", "checked": "2026-10-26",
+    "id": "weglot",
+    "slug": "weglot",
+    "name": "Weglot",
+    "short": "Weglot",
+    "cat": "translation",
+    "rating": "4.5 · 828 reviews",
+    "listing": "https://apps.shopify.com/weglot",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "1 language, 2,000 words" },
-      { "name": "Starter", "price": 17, "limits": "1 language, 10,000 words" },
-      { "name": "Business", "price": 32, "limits": "3 languages, 50,000 words" },
-      { "name": "Pro", "price": 87, "limits": "5 languages, 200,000 words" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "1 language, 2,000 words"
+      },
+      {
+        "name": "Starter",
+        "price": 17,
+        "limits": "1 language, 10,000 words"
+      },
+      {
+        "name": "Business",
+        "price": 32,
+        "limits": "3 languages, 50,000 words"
+      },
+      {
+        "name": "Pro",
+        "price": 87,
+        "limits": "5 languages, 200,000 words"
+      }
     ],
     "verdict": "Polished, with human translation options. Word limits fill quickly once you add languages.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "program", "program": "Weglot partner program (rate not published)", "url": null }
+    "affiliate": {
+      "status": "program",
+      "program": "Weglot partner program (rate not published)",
+      "url": null
+    }
   },
   {
-    "id": "langify", "slug": "langify", "name": "langify", "short": "langify", "cat": "translation",
-    "rating": "4.7 · 727 reviews", "listing": "https://apps.shopify.com/langify", "checked": "2026-10-26",
+    "id": "langify",
+    "slug": "langify",
+    "name": "langify",
+    "short": "langify",
+    "cat": "translation",
+    "rating": "4.7 · 727 reviews",
+    "listing": "https://apps.shopify.com/langify",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Up to 5 languages" },
-      { "name": "Basic", "price": 17.5, "limits": "Up to 20 languages, 10,000 automatic-translation words" },
-      { "name": "Growth", "price": 29.95, "limits": "50,000 words" },
-      { "name": "Premium", "price": 59.95, "limits": "200,000 words" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 5 languages"
+      },
+      {
+        "name": "Basic",
+        "price": 17.5,
+        "limits": "Up to 20 languages, 10,000 automatic-translation words"
+      },
+      {
+        "name": "Growth",
+        "price": 29.95,
+        "limits": "50,000 words"
+      },
+      {
+        "name": "Premium",
+        "price": 59.95,
+        "limits": "200,000 words"
+      }
     ],
     "verdict": "Cheaper per word than Weglot at every tier.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "to-contact", "program": null, "url": null }
+    "affiliate": {
+      "status": "to-contact",
+      "program": null,
+      "url": null
+    }
   },
   {
-    "id": "translate", "slug": "translate-and-adapt", "name": "Shopify Translate & Adapt", "short": "Translate & Adapt", "cat": "translation",
-    "rating": "4.4 · 1,398 reviews", "listing": "https://apps.shopify.com/translate-and-adapt", "checked": "2026-10-26",
+    "id": "translate",
+    "slug": "translate-and-adapt",
+    "name": "Shopify Translate & Adapt",
+    "short": "Translate & Adapt",
+    "cat": "translation",
+    "rating": "4.4 · 1,398 reviews",
+    "listing": "https://apps.shopify.com/translate-and-adapt",
+    "checked": "2026-10-26",
     "plans": [
-      { "name": "Free", "price": 0, "limits": "Automatic translation into up to 2 languages; unlimited manual translations" }
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Automatic translation into up to 2 languages; unlimited manual translations"
+      }
     ],
     "verdict": "Free and made by Shopify. Enough for one or two languages if you can review the machine translation.",
     "watch": null,
     "source": "Shopify App Store listing",
-    "affiliate": { "status": "none", "program": null, "url": null }
+    "affiliate": {
+      "status": "none",
+      "program": null,
+      "url": null
+    }
   }
 ]
