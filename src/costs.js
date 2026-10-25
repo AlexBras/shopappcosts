@@ -42,7 +42,7 @@
     if (v.subs === 0) {
       out.subscriptions.push({ id: "seal", cost: 0, why: "No subscribers yet." }, { id: "recharge", cost: 25, why: "Entry plan." });
     } else {
-      const s = v.subs <= 50 ? [0, "Free plan"] : v.subs <= 100 ? [5.95, "$5.95 plan"] : v.subs <= 250 ? [9.95, "Rising Star"] : v.subs <= 500 ? [24.95, "Legend"] : null;
+      const s = v.subs <= 50 ? [0, "Free plan"] : v.subs <= 100 ? [5.95, "Supersale"] : v.subs <= 250 ? [9.95, "Rising Star"] : v.subs <= 500 ? [24.95, "Legend"] : null;
       out.subscriptions.push(s
         ? { id: "seal", cost: s[0], why: `${s[1]}, ${n(v.subs)} subscribers, no transaction fee.` }
         : { id: "seal", cost: null, why: "Above 500 subscribers: larger plans exist, prices not published." });

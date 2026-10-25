@@ -10,7 +10,7 @@
     "checked": "2026-10-26",
     "plans": [
       {
-        "name": "Free",
+        "name": "Forever Free",
         "price": 0,
         "limits": "Unlimited review requests, photo and video reviews"
       },
@@ -40,7 +40,7 @@
     "checked": "2026-10-26",
     "plans": [
       {
-        "name": "Free",
+        "name": "Beginner",
         "price": 0,
         "limits": "Up to 500 orders"
       },
@@ -257,7 +257,7 @@
         "limits": "Up to 50 subscriptions"
       },
       {
-        "name": "Paid",
+        "name": "Supersale",
         "price": 5.95,
         "limits": "Up to 100 subscriptions"
       },

@@ -38,7 +38,7 @@ function toLines(html) {
    and "All charges are billed in USD..." (then "See all pricing options"). We keep that block.
    Pages without it (an app with no paid plan) fall back to price-like lines only.
    Rating numbers and review counts are dropped so they never trigger a false alert. */
-const VOLATILE = /^\d(\.\d)?$|\(\d{1,3}(,\d{3})*\)|\b\d[\d,]* reviews?\b|\bout of 5\b/i;
+const VOLATILE = /^\d(\.\d)?$|\(\d{1,3}(,\d{3})*\)|\b\d[\d,]* reviews?\b|\bout of 5\b|^try shopify free\b/i;
 const START = /^choose the plan that best fits your business\.?$/i;
 const END = /^(see all pricing options|all charges are billed\b.*)$/i;
 function pricingSection(lines) {
