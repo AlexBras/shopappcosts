@@ -1,0 +1,60 @@
+name: Daily price check
+
+on:
+  schedule:
+    - cron: "17 11 * * *"   # every day 11:17 UTC (06:17 New York, 22:17 Nouméa)
+  workflow_dispatch: {}      # "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: price-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Read every listing and compare with the last snapshot
+        id: check
+        run: node scripts/check-prices.js
+
+      - name: Make sure the site still builds
+        run: node build.js
+
+      # No price change: save today's check dates on main. Cloudflare Pages redeploys,
+      # so "Last checked" on the site moves forward.
+      - name: Save check dates
+        if: steps.check.outputs.changed != 'true'
+        run: |
+          git config user.name "price-check-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/check-status.json data/snapshots
+          if git diff --cached --quiet; then echo "Nothing to save"; exit 0; fi
+          git commit -m "Daily price check: no pricing change"
+          git push
+
+      # Price change: open a pull request with the new snapshots and draft changelog entries.
+      # Nothing goes live until you review and merge it.
+      - name: Open a pull request for the change
+        if: steps.check.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: price-change/auto
+          delete-branch: true
+          commit-message: "Pricing change detected on a tracked listing"
+          title: "Pricing change detected – review before publishing"
+          body-path: price-report.md
+          labels: price-change
+          add-paths: |
+            data/check-status.json
+            data/snapshots/**
+            data/changelog.json

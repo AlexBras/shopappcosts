@@ -1,0 +1,20 @@
+{
+  "name": "ShopAppCosts",
+  "nameParts": [
+    "ShopApp",
+    "Costs"
+  ],
+  "baseUrl": "https://shopappcosts.com",
+  "tagline": "Shopify app costs, checked at the source",
+  "lastChecked": "2026-10-26",
+  "defaultScenario": {
+    "orders": 600,
+    "contacts": 2000,
+    "emails": 12000,
+    "subs": 120,
+    "aov": 45,
+    "words": 8000,
+    "langs": 1
+  },
+  "contactEmail": "hello@shopappcosts.com"
+}

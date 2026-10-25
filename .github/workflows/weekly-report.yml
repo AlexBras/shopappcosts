@@ -1,0 +1,44 @@
+name: Weekly report
+
+on:
+  schedule:
+    - cron: "43 19 * * 0"   # Sunday 19:43 UTC = Monday 06:43 Nouméa
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: List pull requests waiting for review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh pr list --state open --json title,url,createdAt > open-prs.json
+
+      - name: Write the report
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          OWNER: ${{ github.repository_owner }}
+        run: node scripts/weekly-report.js
+
+      # The report is posted as an issue; GitHub emails it to you (the mention guarantees it).
+      # Last week's report is closed so only the current one stays open.
+      - name: Post the report as an issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create weekly-report --color 0b7a5a --force >/dev/null
+          for n in $(gh issue list --label weekly-report --state open --json number --jq '.[].number'); do
+            gh issue close "$n" --comment "Replaced by the new weekly report."
+          done
+          gh issue create --title "Weekly report – $(date -u +%F)" --label weekly-report --body-file weekly-report.md

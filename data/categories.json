@@ -1,0 +1,169 @@
+[
+  {
+    "id": "reviews",
+    "slug": "shopify-review-apps",
+    "title": "Product reviews",
+    "seoTitle": "Shopify review apps compared: real monthly cost by order volume",
+    "lede": "Collect and display reviews. Pricing mostly depends on monthly orders.",
+    "watch": "Free plans are generous here. Pay only for what you would use: video reviews, AI summaries, syndication to Google and Meta.",
+    "driver": "orders",
+    "driverLabel": "orders / month",
+    "scenarios": [
+      {
+        "label": "50 orders",
+        "v": {
+          "orders": 50
+        }
+      },
+      {
+        "label": "300 orders",
+        "v": {
+          "orders": 300
+        }
+      },
+      {
+        "label": "600 orders",
+        "v": {
+          "orders": 600
+        }
+      },
+      {
+        "label": "1,500 orders",
+        "v": {
+          "orders": 1500
+        }
+      },
+      {
+        "label": "3,000 orders",
+        "v": {
+          "orders": 3000
+        }
+      }
+    ],
+    "metaTitle": "Shopify review apps: real monthly cost compared"
+  },
+  {
+    "id": "email",
+    "slug": "shopify-email-marketing-apps",
+    "title": "Email marketing",
+    "seoTitle": "Shopify email marketing apps compared: real monthly cost by list size",
+    "lede": "Campaigns and automated flows. Pricing depends on contacts and email volume.",
+    "watch": "Most email apps publish only a starting price: the bill rises with your list size.",
+    "driver": "contacts",
+    "driverLabel": "contacts",
+    "scenarios": [
+      {
+        "label": "250 contacts · 500 emails",
+        "v": {
+          "contacts": 250,
+          "emails": 500
+        }
+      },
+      {
+        "label": "500 contacts · 3,000 emails",
+        "v": {
+          "contacts": 500,
+          "emails": 3000
+        }
+      },
+      {
+        "label": "2,000 contacts · 12,000 emails",
+        "v": {
+          "contacts": 2000,
+          "emails": 12000
+        }
+      },
+      {
+        "label": "10,000 contacts · 60,000 emails",
+        "v": {
+          "contacts": 10000,
+          "emails": 60000
+        }
+      }
+    ],
+    "metaTitle": "Shopify email apps: real monthly cost compared"
+  },
+  {
+    "id": "subscriptions",
+    "slug": "shopify-subscription-apps",
+    "title": "Subscriptions",
+    "seoTitle": "Shopify subscription apps compared: real monthly cost incl. transaction fees",
+    "lede": "Recurring orders. Pricing depends on subscribers, and sometimes a fee on every renewal.",
+    "watch": "A transaction fee on renewals can cost more than the monthly plan once you pass a few hundred subscribers.",
+    "driver": "subs",
+    "driverLabel": "active subscribers",
+    "scenarios": [
+      {
+        "label": "30 subscribers",
+        "v": {
+          "subs": 30,
+          "aov": 45
+        }
+      },
+      {
+        "label": "100 subscribers",
+        "v": {
+          "subs": 100,
+          "aov": 45
+        }
+      },
+      {
+        "label": "250 subscribers",
+        "v": {
+          "subs": 250,
+          "aov": 45
+        }
+      },
+      {
+        "label": "500 subscribers",
+        "v": {
+          "subs": 500,
+          "aov": 45
+        }
+      }
+    ],
+    "scenarioNote": "Assumes one renewal per subscriber per month at a $45 average order.",
+    "metaTitle": "Shopify subscription apps: real cost incl. fees"
+  },
+  {
+    "id": "translation",
+    "slug": "shopify-translation-apps",
+    "title": "Translation",
+    "seoTitle": "Shopify translation apps compared: real monthly cost by words and languages",
+    "lede": "Sell in more languages. Pricing depends on words translated and the number of languages.",
+    "watch": "Word limits usually count every translated word, so 10,000 words in 2 languages uses 20,000.",
+    "driver": "words",
+    "driverLabel": "words × languages",
+    "scenarios": [
+      {
+        "label": "8,000 words · 1 language",
+        "v": {
+          "words": 8000,
+          "langs": 1
+        }
+      },
+      {
+        "label": "8,000 words · 2 languages",
+        "v": {
+          "words": 8000,
+          "langs": 2
+        }
+      },
+      {
+        "label": "15,000 words · 3 languages",
+        "v": {
+          "words": 15000,
+          "langs": 3
+        }
+      },
+      {
+        "label": "35,000 words · 5 languages",
+        "v": {
+          "words": 35000,
+          "langs": 5
+        }
+      }
+    ],
+    "metaTitle": "Shopify translation apps: real monthly cost compared"
+  }
+]

@@ -1,0 +1,6 @@
+dist/
+node_modules/
+.DS_Store
+price-report.md
+weekly-report.md
+open-prs.json
