@@ -108,6 +108,7 @@ function page({ path: p, title, description, body, crumbs = [], jsonld = [], cal
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(clip(description))}">
 ${noindex ? '<meta name="robots" content="noindex">' : `<link rel="canonical" href="${BASE}${p}">`}
+${(site.verificationMeta || []).map(m => `<meta name="${esc(m.name)}" content="${esc(m.content)}">`).join("\n")}
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="${esc(site.name)}">
 <meta property="og:title" content="${esc(title)}">

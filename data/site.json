@@ -16,5 +16,11 @@
     "words": 8000,
     "langs": 1
   },
-  "contactEmail": "hello@shopappcosts.com"
+  "contactEmail": "hello@shopappcosts.com",
+  "verificationMeta": [
+    {
+      "name": "fo-verify",
+      "content": "6ded63bb-dead-416a-99a0-1c1577283841"
+    }
+  ]
 }
