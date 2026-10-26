@@ -55,6 +55,111 @@
       "lastAttempt": "2026-10-26",
       "ok": true,
       "confirmed": "2026-10-26"
+    },
+    "okendo": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "stamped": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "mailchimp": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "appstle": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "loop": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "bold": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "langshop": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "transcy": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "hextom": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "smile": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "loyaltylion": {
+      "lastAttempt": "2026-10-26",
+      "ok": false,
+      "error": "HTTP 429"
+    },
+    "growave": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "reconvert": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "fbt": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "zipify": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "pagefly": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "gempages": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "shogun": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "pluginseo": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "searchpie": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
+    },
+    "avada": {
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     }
   }
 }

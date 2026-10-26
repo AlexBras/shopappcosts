@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-10-26",
+    "app": "translate",
+    "title": "Translate & Adapt: pricing changed on the listing",
+    "body": "Before: Use translations by Shopify for up to 2 languages.. Now: Use translations by Shopify for up to 2 languages, or 8 in select countries..",
+    "source": "Shopify App Store listing, automatic daily check"
+  },
+  {
     "date": "2026-10-27",
     "app": null,
     "title": "Tracking expands to 32 apps in 8 categories",
