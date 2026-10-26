@@ -108,8 +108,8 @@
     },
     "loyaltylion": {
       "lastAttempt": "2026-10-26",
-      "ok": false,
-      "error": "HTTP 429"
+      "ok": true,
+      "confirmed": "2026-10-26"
     },
     "growave": {
       "lastAttempt": "2026-10-26",
