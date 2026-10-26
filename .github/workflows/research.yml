@@ -1,0 +1,34 @@
+name: Research listings (manual)
+
+# Reads candidate app listings and pushes the result to the "research" branch.
+# Used when adding new apps to the site. Does not touch main or the live site.
+on:
+  workflow_dispatch:
+    inputs:
+      handles:
+        description: "Shopify App Store handles, space separated"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Read listings
+        env:
+          HANDLES: ${{ inputs.handles }}
+        run: node scripts/research-listings.js "$HANDLES"
+      - name: Push results to the research branch
+        run: |
+          git config user.name "price-check-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B research
+          git add -f research/listings.json
+          git commit -m "Listing research $(date -u +%F)"
+          git push -f origin research
