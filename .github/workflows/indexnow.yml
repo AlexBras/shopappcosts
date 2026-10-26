@@ -1,0 +1,27 @@
+name: Notify search engines (IndexNow)
+
+# After a change to the site goes live, tell Bing and the other IndexNow engines to re-crawl it.
+# Daily "no pricing change" commits only move a date, so they are skipped.
+on:
+  push:
+    branches: [main]
+    paths: ["data/**", "src/**", "build.js"]
+  workflow_dispatch: {}
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: true
+
+jobs:
+  ping:
+    if: ${{ !startsWith(github.event.head_commit.message, 'Daily price check') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Submit the sitemap URLs
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: node scripts/indexnow.js

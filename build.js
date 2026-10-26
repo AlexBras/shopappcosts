@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { costs, cheapest, usd2, setPrices, pricesFromApps } = require("./src/costs.js");
+const { costs, cheapest, usd2, setApps } = require("./src/costs.js");
 
 const ROOT = __dirname;
 const OUT = path.join(ROOT, "dist");
@@ -34,7 +34,7 @@ const BASE = (process.env.SITE_URL || site.baseUrl).replace(/\/$/, "");
 
 const byId = Object.fromEntries(APPS.map(a => [a.id, a]));
 const catById = Object.fromEntries(CATS.map(c => [c.id, c]));
-setPrices(pricesFromApps(APPS)); /* the calculator reads plan prices from data/apps.json */
+setApps(APPS); /* plan prices, limits and fees come from data/apps.json */
 
 /* ---------- helpers ---------- */
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -64,7 +64,23 @@ for (const c of CATS) {
 }
 
 /* Cost of one app in one scenario (scenario values on top of the default store). */
-const costFor = (app, v) => costs(Object.assign({}, site.defaultScenario, v))[app.cat].find(r => r.id === app.id) || null;
+const costFor = (app, v) => (costs(Object.assign({}, site.defaultScenario, v))[app.cat] || []).find(r => r.id === app.id) || null;
+
+/* Categories the calculator covers: those whose scenarios only use calculator inputs. */
+const CALC_INPUTS = ["orders", "contacts", "emails", "subs", "aov", "words", "langs", "products"];
+const hasCost = c => c.scenarios && c.scenarios.length > 0;
+const CALC_CATS = CATS.filter(c => hasCost(c) && c.scenarios.every(s => Object.keys(s.v).every(k => CALC_INPUTS.includes(k))));
+
+/* Plan helpers for FAQs and price-only categories. */
+const realFree = a => a.plans.find(p => p.price === 0 && !p.testOnly);
+const paidPlans = a => a.plans.filter(p => p.price > 0);
+const planWord = name => /plan$/i.test(name) ? name : `${name} plan`;
+const midScenario = c => c.scenarios[Math.floor((c.scenarios.length - 1) / 2)];
+const lcfirst = t => t.charAt(0).toLowerCase() + t.slice(1);
+const ucfirst = t => t.charAt(0).toUpperCase() + t.slice(1);
+const andList = arr => arr.length < 2 ? arr.join("") : `${arr.slice(0, -1).join(", ")} and ${arr[arr.length - 1]}`;
+const sizeText = s => s.label.toLowerCase().replace(/ · /g, " and ");
+const faqCost = r => r.cost === 0 ? "nothing ($0)" : costCell(r);
 
 /* ---------- assets (content-hashed) ---------- */
 fs.rmSync(OUT, { recursive: true, force: true });
@@ -81,7 +97,7 @@ for (const f of ["style.css", "costs.js", "calc.js"]) {
 /* ---------- layout ---------- */
 const NAV = [
   ["/calculator/", "Cost calculator"],
-  ...CATS.map(c => [catUrl(c), c.title]),
+  ["/apps/", "All apps"],
   ["/compare/", "Comparisons"],
   ["/price-changes/", "Price changes"]
 ];
@@ -98,8 +114,13 @@ function crumbsLd(crumbs) {
     itemListElement: all.map((c, i) => ({ "@type": "ListItem", position: i + 1, name: c[1], item: BASE + c[0] })) };
 }
 
-function page({ path: p, title, description, body, crumbs = [], jsonld = [], calc = false, lastmod = site.lastChecked, noindex = false }) {
+function page({ path: p, title, description, body, crumbs = [], jsonld = [], faq = [], calc = false, lastmod = site.lastChecked, noindex = false }) {
   const ld = [...jsonld];
+  if (faq.length) {
+    ld.push({ "@context": "https://schema.org", "@type": "FAQPage",
+      mainEntity: faq.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })) });
+    body += faqHtml(faq);
+  }
   if (crumbs.length) ld.push(crumbsLd(crumbs));
   const html = `<!doctype html>
 <html lang="en">
@@ -115,7 +136,10 @@ ${(site.verificationMeta || []).map(m => `<meta name="${esc(m.name)}" ${m.value 
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(clip(description, 200))}">
 <meta property="og:url" content="${BASE}${p}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="${BASE}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#0b7a5a">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,6 +159,7 @@ ${crumbsHtml(crumbs)}
 ${body}
 </main>
 <footer class="site">
+  <nav aria-label="Categories">${CATS.map(c => `<a href="${catUrl(c)}">${esc(c.title)}</a>`).join("")}</nav>
   <nav aria-label="Footer"><a href="/methodology/">Methodology</a><a href="/disclosure/">Affiliate disclosure</a><a href="/price-changes/">Price changes</a><a href="/compare/">All comparisons</a><a href="mailto:${esc(site.contactEmail)}">Contact</a></nav>
   <p>${esc(site.name)} is an independent guide. It is not affiliated with Shopify or with the app developers listed. Some outbound links are affiliate links: we may earn a commission at no extra cost to you. That never changes the order or the numbers. <a href="/disclosure/">Details</a>.</p>
   <p class="mono">Prices in USD as shown on listings, excluding taxes. Last checked ${fmtDate(site.lastChecked)}.</p>
@@ -161,24 +186,40 @@ function appCard(a, { link = true } = {}) {
 </article>`;
 }
 
+function faqHtml(faq) {
+  return `<section class="hub" aria-labelledby="h-faq">
+  <div class="hubhead"><div><div class="eyebrow">FAQ</div><h2 id="h-faq">Questions merchants ask</h2></div></div>
+  <div class="faq">${faq.map(([q, a]) => `<div><h3>${esc(q)}</h3><p>${esc(a)}</p></div>`).join("")}</div>
+</section>`;
+}
+
+/* For categories priced by features (no volume to compute): entry prices side by side. */
+function entryTable(apps) {
+  return `<div class="tablewrap"><table><thead><tr><th>App</th><th>Free plan</th><th class="n">Cheapest paid plan</th><th class="n">Top plan</th></tr></thead><tbody>
+  ${apps.map(a => { const f = realFree(a), paid = paidPlans(a), lo = paid[0], hi = paid[paid.length - 1];
+    return `<tr><th scope="row"><a href="${appUrl(a)}">${esc(a.short)}</a></th><td>${f ? esc(`Yes: ${f.limits}`) : "No"}</td><td class="n price">${lo ? esc(`${planPrice(lo)} (${lo.name})`) : "—"}</td><td class="n price">${hi ? esc(`${planPrice(hi)} (${hi.name})`) : "—"}</td></tr>`; }).join("")}
+  </tbody></table></div>`;
+}
+
 function calculatorBlock() {
   const d = site.defaultScenario;
   const meta = {
-    cats: CATS.map(c => ({ id: c.id, title: c.title, url: catUrl(c) })),
+    cats: CALC_CATS.map(c => ({ id: c.id, title: c.title, url: catUrl(c), core: !!c.core })),
     apps: Object.fromEntries(APPS.map(a => [a.id, { short: a.short, url: appUrl(a) }])),
-    prices: pricesFromApps(APPS)
+    appsData: APPS.map(a => ({ id: a.id, cat: a.cat, beyond: a.beyond, plans: a.plans.map(p => ({ name: p.name, price: p.price, from: p.from, fits: p.fits, over: p.over, fee: p.fee, limits: p.limits })) }))
   };
   const f = (id, label, val, small, extra = "") =>
     `<div class="field"><label for="c-${id}">${label}</label><input id="c-${id}" name="${id}" type="number" min="0" value="${val}" inputmode="numeric"${extra}>${small ? `<small>${small}</small>` : ""}</div>`;
   return `<div class="bench">
   <form class="inputs" id="calc" novalidate>
-    ${f("orders", "Orders per month", d.orders, "Drives review-app pricing.")}
+    ${f("orders", "Orders per month", d.orders, "Drives review and loyalty app pricing.")}
     ${f("contacts", "Email contacts", d.contacts)}
     ${f("emails", "Emails sent per month", d.emails)}
     ${f("subs", "Active subscribers", d.subs)}
-    ${f("aov", "Average subscription order (USD)", d.aov, "Used for Recharge's percentage fee. One renewal per subscriber per month assumed.", ' step="any"')}
+    ${f("aov", "Average subscription order (USD)", d.aov, "Used for per-renewal fees and revenue-based plans. One renewal per subscriber per month assumed.", ' step="any"')}
     ${f("words", "Words on your store", d.words, "Product pages, collections, theme text.")}
     ${f("langs", "Extra languages", d.langs, "", ' max="20"')}
+    ${f("products", "Products in your catalog", d.products, "Some translation apps price by products.")}
   </form>
   <div class="results" id="results" aria-live="polite"><noscript>The calculator needs JavaScript. The plan tables on each app page show every price.</noscript></div>
 </div>
@@ -206,7 +247,7 @@ function calcLink(v, label = "Price it with your own numbers →") {
 {
   const c = costs(site.defaultScenario);
   let total = 0, anyFrom = false;
-  const lines = CATS.map(cat => { const b = cheapest(c[cat.id]); total += b.cost; if (b.from) anyFrom = true;
+  const lines = CALC_CATS.filter(cat => cat.core).map(cat => { const b = cheapest(c[cat.id]); total += b.cost; if (b.from) anyFrom = true;
     return `<div class="l"><span>${esc(cat.title)} · ${esc(byId[b.id].short)}</span><span>${(b.from ? "from " : "") + usd2(b.cost)}</span></div>`; }).join("");
   const d = site.defaultScenario;
   const planCount = APPS.reduce((n, a) => n + a.plans.length, 0);
@@ -216,7 +257,7 @@ function calcLink(v, label = "Price it with your own numbers →") {
   page({
     path: "/",
     title: `${site.name}: what Shopify apps really cost at your volume`,
-    description: `Dated price tracker and cost calculator for ${APPS.length} Shopify apps: reviews, email, subscriptions and translation. Every plan read from the official listing.`,
+    description: `Dated price tracker and cost calculator for ${APPS.length} Shopify apps: ${CATS.map(c => c.title.toLowerCase()).join(", ")}. Every plan read from the official listing.`,
     jsonld: [{ "@context": "https://schema.org", "@type": "WebSite", name: site.name, url: BASE + "/" }],
     body: `<section class="hero">
   <div>
@@ -229,7 +270,7 @@ function calcLink(v, label = "Price it with your own numbers →") {
   <div class="receipt" aria-label="Example monthly bill">
     <div class="t">EXAMPLE STORE · ${d.orders.toLocaleString("en-US")} ORDERS/MO</div>
     ${lines}<div class="l tot"><span>TOTAL / MONTH</span><span>${anyFrom ? "from " : ""}${usd2(total)}</span></div>
-    <small>Cheapest plan in each category that fits ${d.orders.toLocaleString("en-US")} orders, ${d.contacts.toLocaleString("en-US")} contacts, ${d.subs} subscribers and ${d.langs} extra language.</small>
+    <small>Cheapest plan in each category that fits ${d.orders.toLocaleString("en-US")} orders, ${d.contacts.toLocaleString("en-US")} contacts, ${d.subs} subscribers and ${d.langs} extra language. Change the numbers in the calculator.</small>
   </div>
 </section>
 
@@ -246,7 +287,7 @@ function calcLink(v, label = "Price it with your own numbers →") {
 
 <section class="hub" aria-labelledby="h-cmp">
   <div class="hubhead"><div><div class="eyebrow">Head to head</div><h2 id="h-cmp">Popular comparisons</h2></div><a class="mono" href="/compare/">All comparisons →</a></div>
-  <ul class="linklist">${PAIRS.map(([a, b]) => `<li><a href="${cmpUrl(a, b)}">${esc(a.short)} vs ${esc(b.short)}</a></li>`).join("")}</ul>
+  <ul class="linklist">${CATS.flatMap(cat => PAIRS.filter(p => p[2].id === cat.id).slice(0, 2)).map(([a, b]) => `<li><a href="${cmpUrl(a, b)}">${esc(a.short)} vs ${esc(b.short)}</a></li>`).join("")}</ul>
 </section>
 
 <section class="hub" aria-labelledby="h-log">
@@ -269,6 +310,7 @@ for (const cat of CATS) {
     title: `${cat.metaTitle} (${monShort(site.lastChecked)})`,
     description: `${list.map(a => a.short).join(", ")}: every plan, dated, and what each costs at your volume. ${cat.lede}`,
     crumbs: [[catUrl(cat), cat.title]],
+    faq: catFaq(cat, list),
     jsonld: [{ "@context": "https://schema.org", "@type": "ItemList", name: cat.seoTitle,
       itemListElement: list.map((a, i) => ({ "@type": "ListItem", position: i + 1, url: BASE + appUrl(a), name: a.name })) }],
     body: `<section class="pagehead">
@@ -277,11 +319,14 @@ for (const cat of CATS) {
   <p class="lede">${esc(cat.lede)}</p>
   <p class="watch read">${esc(cat.watch)}</p>
 </section>
-<section class="hub" aria-labelledby="h-sc">
-  <div class="hubhead"><div><div class="eyebrow">Monthly cost</div><h2 id="h-sc">What each app costs at typical volumes</h2></div>${calcLink({})}</div>
+${hasCost(cat) ? `<section class="hub" aria-labelledby="h-sc">
+  <div class="hubhead"><div><div class="eyebrow">Monthly cost</div><h2 id="h-sc">What each app costs at typical volumes</h2></div>${CALC_CATS.includes(cat) ? calcLink({}) : ""}</div>
   ${scenarioTable(cat, list)}
   <p class="read muted">Cheapest plan that fits each volume. “From” means the vendor publishes only a starting price at that size; “not published” means we could not read a price, so we do not show one.</p>
-</section>
+</section>` : `<section class="hub" aria-labelledby="h-sc">
+  <div class="hubhead"><div><div class="eyebrow">Entry prices</div><h2 id="h-sc">Free plans and price range</h2></div></div>
+  ${entryTable(list)}
+</section>`}
 <section class="hub" aria-labelledby="h-apps">
   <div class="hubhead"><div><div class="eyebrow">Plans</div><h2 id="h-apps">Every plan, as listed</h2></div></div>
   <div class="cards">${list.map(a => appCard(a)).join("")}</div>
@@ -306,9 +351,10 @@ for (const a of APPS) {
   page({
     path: appUrl(a),
     title: `${a.short} pricing (${monShort(a.checked)}): real monthly cost`,
-    description: `${a.name} plans read from the official listing on ${fmtDate(a.checked)}: ${a.plans.map(p => `${p.name} ${planPrice(p)}`).join(", ")}. See what it costs at your ${cat.driverLabel}.`,
+    description: `${a.name} plans read from the official listing on ${fmtDate(a.checked)}: ${a.plans.map(p => `${p.name} ${planPrice(p)}`).join(", ")}.${hasCost(cat) ? ` See what it costs at your ${cat.driverLabel}.` : ""}`,
     crumbs: [[catUrl(cat), cat.title], [appUrl(a), a.short]],
     lastmod: a.checked,
+    faq: appFaq(a, cat),
     jsonld: [{ "@context": "https://schema.org", "@type": "SoftwareApplication", name: a.name,
       applicationCategory: "BusinessApplication", operatingSystem: "Shopify", url: a.listing,
       offers: { "@type": "AggregateOffer", priceCurrency: "USD", lowPrice: lowest, highPrice: paid.length ? Math.max(...paid) : lowest, offerCount: a.plans.length } }],
@@ -317,7 +363,7 @@ for (const a of APPS) {
   <h1>${esc(a.short)} pricing: what it really costs per month</h1>
   <p class="lede">${esc(a.verdict)}</p>
   ${a.watch ? `<p class="watch read">${esc(a.watch)}</p>` : ""}
-  <div class="actions">${outLink(a, `Visit ${a.short}`)}<a class="cta ghost" href="${calcLinkHref({})}">Price my whole stack</a></div>
+  <div class="actions">${outLink(a, `Visit ${a.short}`)}${CALC_CATS.includes(cat) ? `<a class="cta ghost" href="${calcLinkHref({})}">Price my whole stack</a>` : `<a class="cta ghost" href="${catUrl(cat)}">Compare ${esc(cat.title.toLowerCase())} apps</a>`}</div>
 </section>
 <section class="hub" aria-labelledby="h-plans">
   <div class="hubhead"><div><div class="eyebrow">Plans</div><h2 id="h-plans">Every ${esc(a.short)} plan</h2></div><span class="mono muted">USD per month</span></div>
@@ -326,11 +372,11 @@ for (const a of APPS) {
   </tbody></table></div>
   <p class="src">Source: ${esc(a.source)}${a.rating ? ` · Rating on the listing: ★ ${esc(a.rating)}` : ""} · <a href="${esc(a.listing)}" rel="nofollow noopener" target="_blank">Official listing</a></p>
 </section>
-<section class="hub" aria-labelledby="h-vol">
-  <div class="hubhead"><div><div class="eyebrow">At your volume</div><h2 id="h-vol">${esc(a.short)} monthly cost by ${esc(cat.driverLabel)}</h2></div>${calcLink({})}</div>
+${hasCost(cat) ? `<section class="hub" aria-labelledby="h-vol">
+  <div class="hubhead"><div><div class="eyebrow">At your volume</div><h2 id="h-vol">${esc(a.short)} monthly cost by ${esc(cat.driverLabel)}</h2></div>${CALC_CATS.includes(cat) ? calcLink({}) : ""}</div>
   <div class="tablewrap"><table><thead><tr><th>Your store</th><th class="n">Monthly cost</th><th>How we got it</th></tr></thead><tbody>${scenRows}</tbody></table></div>
   ${cat.scenarioNote ? `<p class="mono muted">${esc(cat.scenarioNote)}</p>` : ""}
-</section>
+</section>` : ""}
 ${peers.length ? `<section class="hub" aria-labelledby="h-alt">
   <div class="hubhead"><div><div class="eyebrow">Alternatives</div><h2 id="h-alt">${esc(a.short)} alternatives, compared</h2></div><a class="mono" href="${catUrl(cat)}">All ${esc(cat.title.toLowerCase())} apps →</a></div>
   <ul class="linklist">${pairs.map(([x, y]) => `<li><a href="${cmpUrl(x, y)}">${esc(x.short)} vs ${esc(y.short)}</a></li>`).join("")}</ul>
@@ -351,7 +397,8 @@ for (const [a, b, cat] of PAIRS) {
     return { s, win: lo, txt: `${lo.short} is cheaper (${costCell(rlo)} vs ${costCell(rhi)})`, sure: !rlo.from };
   });
   const winsA = lines.filter(l => l.win === a && l.sure).length, winsB = lines.filter(l => l.win === b && l.sure).length;
-  const summary = winsA === 0 && winsB === 0
+  const summary = !hasCost(cat) ? entrySummary(a, b)
+    : winsA === 0 && winsB === 0
     ? `No clear winner from published prices: at most sizes one of the two vendors lists only a starting price. The table shows exactly what each publishes.`
     : winsA === winsB
     ? `Neither app is cheaper at every size: it depends on your ${cat.driverLabel}. The table shows where each one wins.`
@@ -360,18 +407,24 @@ for (const [a, b, cat] of PAIRS) {
   page({
     path: cmpUrl(a, b),
     title,
-    description: `${a.short} vs ${b.short}: monthly cost at ${cat.scenarios.length} store sizes, every plan side by side, read from the official listings on ${fmtDate(site.lastChecked)}.`,
+    description: hasCost(cat)
+      ? `${a.short} vs ${b.short}: monthly cost at ${cat.scenarios.length} store sizes, every plan side by side, read from the official listings on ${fmtDate(site.lastChecked)}.`
+      : `${a.short} vs ${b.short}: free plans, entry prices and every plan side by side, read from the official listings on ${fmtDate(site.lastChecked)}.`,
     crumbs: [["/compare/", "Comparisons"], [cmpUrl(a, b), `${a.short} vs ${b.short}`]],
+    faq: cmpFaq(a, b, cat, summary),
     body: `<section class="pagehead">
   <div class="eyebrow">${esc(cat.title)} · compared ${fmtDate(site.lastChecked)}</div>
   <h1>${esc(a.short)} vs ${esc(b.short)}: the real monthly cost</h1>
   <p class="lede">${esc(summary)}</p>
 </section>
-<section class="hub" aria-labelledby="h-cost">
-  <div class="hubhead"><div><div class="eyebrow">Monthly cost</div><h2 id="h-cost">Side by side at ${cat.scenarios.length} store sizes</h2></div>${calcLink({})}</div>
+${hasCost(cat) ? `<section class="hub" aria-labelledby="h-cost">
+  <div class="hubhead"><div><div class="eyebrow">Monthly cost</div><h2 id="h-cost">Side by side at ${cat.scenarios.length} store sizes</h2></div>${CALC_CATS.includes(cat) ? calcLink({}) : ""}</div>
   ${scenarioTable(cat, [a, b])}
   <ul class="prose" style="padding-left:20px">${lines.map(l => `<li><b>${esc(l.s.label)}:</b> ${esc(l.txt)}.</li>`).join("")}</ul>
-</section>
+</section>` : `<section class="hub" aria-labelledby="h-cost">
+  <div class="hubhead"><div><div class="eyebrow">Entry prices</div><h2 id="h-cost">Free plans and price range</h2></div></div>
+  ${entryTable([a, b])}
+</section>`}
 <section class="hub" aria-labelledby="h-pl">
   <div class="hubhead"><div><div class="eyebrow">Plans</div><h2 id="h-pl">Every plan, as listed</h2></div></div>
   <div class="cards">${appCard(a)}${appCard(b)}</div>
@@ -381,12 +434,85 @@ for (const [a, b, cat] of PAIRS) {
   <div class="prose">
     <p><b>Pick ${esc(a.short)}</b> if this matters most: ${esc(a.verdict)}</p>
     <p><b>Pick ${esc(b.short)}</b> if this matters most: ${esc(b.verdict)}</p>
-    <p class="muted">Not sure about your volume? Enter it in the <a href="${calcLinkHref({})}">cost calculator</a>, which also prices the rest of your app stack.</p>
+    ${CALC_CATS.includes(cat) ? `<p class="muted">Not sure about your volume? Enter it in the <a href="${calcLinkHref({})}">cost calculator</a>, which also prices the rest of your app stack.</p>` : `<p class="muted">See every ${esc(cat.title.toLowerCase())} app we track on the <a href="${catUrl(cat)}">category page</a>.</p>`}
   </div>
   <div class="actions">${outLink(a, `Visit ${a.short}`)}${outLink(b, `Visit ${b.short}`, "cta ghost")}</div>
 </section>`
   });
 }
+
+/* ---------- FAQ text, built only from the data ---------- */
+function freeAnswer(a) {
+  const f = realFree(a), paid = paidPlans(a);
+  if (f) return `Yes. The ${planWord(f.name)} costs $0: ${lcfirst(f.limits.replace(/\.$/, ""))}.`;
+  return paid.length ? `No. The cheapest plan is ${paid[0].name} at ${planPrice(paid[0])} a month (${paid[0].limits.replace(/\.$/, "")}).` : "No.";
+}
+function rangeAnswer(a) {
+  const paid = paidPlans(a);
+  if (!paid.length) return `${a.short} is free.`;
+  const lo = paid.reduce((x, y) => (y.price < x.price ? y : x)), hi = paid.reduce((x, y) => (y.price > x.price ? y : x));
+  let t = lo === hi ? `${a.short} has one paid plan, ${lo.name}, at ${planPrice(lo)} a month.`
+    : `Paid plans run from ${usd(lo.price)} (${lo.name}) to ${usd(hi.price)}${hi.from ? " or more" : ""} (${hi.name}) a month, read on the Shopify App Store listing on ${fmtDate(a.checked)}.`;
+  if (paid.some(p => p.from)) t += " Some plans show only a starting price that rises with your volume.";
+  const fees = paid.filter(p => p.fee);
+  if (fees.length) t += ` Plans also charge a fee on every transaction (${fees.map(p => `${p.name} ${p.fee.pct}%`).join(", ")}).`;
+  return t;
+}
+function appFaq(a, cat) {
+  const q = [[`Does ${a.short} have a free plan?`, freeAnswer(a)], [`How much does ${a.short} cost per month?`, rangeAnswer(a)]];
+  if (hasCost(cat)) {
+    const s = midScenario(cat), r = costFor(a, s.v);
+    if (r) q.push([`How much does ${a.short} cost for ${sizeText(s)}?`,
+      r.cost === null ? `The listing does not publish a price at that size. ${r.why}` : `${ucfirst(faqCost(r))} a month. ${r.why}`]);
+    const peers = APPS.filter(x => x.cat === a.cat).map(x => ({ x, r: costFor(x, s.v) })).filter(o => o.r && o.r.cost !== null && !o.r.from);
+    const others = peers.filter(o => o.x.id !== a.id).sort((u, v) => u.r.cost - v.r.cost);
+    if (others.length) {
+      const best = others[0];
+      q.push([`What is the cheapest alternative to ${a.short}?`,
+        `At ${sizeText(s)}, ${best.x.short} costs ${faqCost(best.r)} a month, the lowest published price among the other ${cat.noun}s we track. See the ${a.short} vs ${best.x.short} comparison for the plans side by side.`]);
+    }
+  }
+  return q;
+}
+function entrySummary(a, b) {
+  const fa = realFree(a), fb = realFree(b), pa = paidPlans(a)[0], pb = paidPlans(b)[0];
+  const free = fa && fb ? "Both have a free plan." : fa ? `Only ${a.short} has a free plan.` : fb ? `Only ${b.short} has a free plan.` : "Neither has a free plan.";
+  if (!pa || !pb) return free;
+  const lo = pa.price <= pb.price ? [a, pa] : [b, pb], hi = lo[0] === a ? [b, pb] : [a, pa];
+  return `${free} ${lo[0].short}'s cheapest paid plan is ${planPrice(lo[1])}, against ${planPrice(hi[1])} for ${hi[0].short}. These apps price by features, so compare what each plan includes.`;
+}
+function cmpFaq(a, b, cat, summary) {
+  return [[`Which is cheaper, ${a.short} or ${b.short}?`, summary],
+    [`Does ${a.short} have a free plan?`, freeAnswer(a)],
+    [`Does ${b.short} have a free plan?`, freeAnswer(b)]];
+}
+function catFaq(cat, list) {
+  const free = list.filter(realFree).map(a => a.short);
+  const q = [];
+  if (hasCost(cat)) {
+    const s = midScenario(cat);
+    const rows = list.map(a => ({ a, r: costFor(a, s.v) })).filter(o => o.r && o.r.cost !== null && !o.r.from).sort((u, v) => u.r.cost - v.r.cost);
+    if (rows.length) q.push([`What is the cheapest Shopify ${cat.noun}?`,
+      `At ${sizeText(s)}, ${rows[0].a.short} costs ${faqCost(rows[0].r)} a month${rows[1] ? `, then ${rows[1].a.short} at ${faqCost(rows[1].r)}` : ""}. The answer changes with your volume: the table above shows each size.`]);
+  }
+  q.push([`Which Shopify ${cat.noun}s have a free plan?`,
+    free.length ? `${andList(free)} ${free.length > 1 ? "have free plans. Their" : "has a free plan. Its"} limits are in the plan tables above.` : `None of the ${list.length} ${cat.noun}s we track has a free plan.`]);
+  return q;
+}
+
+/* ---------- all apps index ---------- */
+page({
+  path: "/apps/",
+  title: `All ${APPS.length} Shopify apps we track: pricing and plans (${monShort(site.lastChecked)})`,
+  description: `Pricing for ${APPS.length} Shopify apps across ${CATS.length} categories, read from the official listings and re-checked daily.`,
+  crumbs: [["/apps/", "All apps"]],
+  body: `<section class="pagehead"><div class="eyebrow">All apps</div><h1>Every Shopify app we track</h1><p class="lede">${APPS.length} apps in ${CATS.length} categories. Each page lists every plan, dated, with what it costs at your volume.</p></section>
+${CATS.map(cat => `<section class="hub"><div class="hubhead"><h2><a href="${catUrl(cat)}" style="color:inherit">${esc(cat.title)}</a></h2></div>
+  <div class="tablewrap"><table><thead><tr><th>App</th><th>Free plan</th><th class="n">Paid plans</th><th>Rating</th></tr></thead><tbody>
+  ${APPS.filter(a => a.cat === cat.id).map(a => { const paid = paidPlans(a), f = realFree(a);
+    return `<tr><th scope="row"><a href="${appUrl(a)}">${esc(a.short)}</a></th><td>${f ? "Yes" : "No"}</td><td class="n price">${paid.length ? esc(paid.length > 1 ? `${planPrice(paid[0])} – ${planPrice(paid[paid.length - 1])}` : planPrice(paid[0])) : "—"}</td><td class="mono">${a.rating ? esc("★ " + a.rating) : ""}</td></tr>`; }).join("")}
+  </tbody></table></div></section>`).join("")}`
+});
 
 /* ---------- compare index ---------- */
 page({
@@ -402,7 +528,7 @@ ${CATS.map(cat => { const ps = PAIRS.filter(p => p[2].id === cat.id); return ps.
 page({
   path: "/calculator/",
   title: `Shopify app cost calculator: your monthly app bill (${monthYear(site.lastChecked)})`,
-  description: "Enter your orders, contacts, subscribers and words. See the cheapest plan that fits in each category, with the formula behind every number.",
+  description: "Enter your orders, contacts, subscribers, words and products. See the cheapest plan that fits in each category, with the formula behind every number.",
   crumbs: [["/calculator/", "Cost calculator"]],
   calc: true,
   body: `<section class="pagehead"><div class="eyebrow">Cost calculator</div><h1>Your monthly Shopify app bill</h1>
@@ -432,7 +558,7 @@ page({
 <div class="method">
   <div><span class="k">01</span><h3>Read at the source</h3><p>Each plan comes from the app's official Shopify App Store listing, or the vendor's own help center when the listing is silent. Every app page names its source and links to it.</p></div>
   <div><span class="k">02</span><h3>Dated, then re-read</h3><p>Every price carries the date it was read. Each listing is re-read automatically every day. When one changes, the change goes into the <a href="/price-changes/">change log</a> with the date and the source.</p></div>
-  <div><span class="k">03</span><h3>Cost at your volume</h3><p>Plans charge on orders, contacts, subscribers or words. The calculator applies each vendor's published rule and shows the formula.</p></div>
+  <div><span class="k">03</span><h3>Cost at your volume</h3><p>Plans charge on orders, contacts, subscribers, revenue, words, products or pages. The calculator applies each vendor's published rule and shows the formula.</p></div>
   <div><span class="k">04</span><h3>No guessing</h3><p>When a vendor publishes only a starting price, we show “from” and flag it. A price we have not read is never shown as a number.</p></div>
 </div>
 <div class="prose"><h2>Independence</h2><p>Affiliate commissions never change a price, a ranking or a verdict. Apps without an affiliate program are listed and compared the same way. See the <a href="/disclosure/">affiliate disclosure</a>.</p>
@@ -482,6 +608,8 @@ fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="U
 ${pages.map(p => `  <url><loc>${BASE}${p.path}</loc><lastmod>${p.lastmod}</lastmod></url>`).join("\n")}
 </urlset>
 `);
+if (fs.existsSync(path.join(ROOT, "src", "og.png"))) fs.copyFileSync(path.join(ROOT, "src", "og.png"), path.join(OUT, "og.png"));
+if (site.indexNowKey) fs.writeFileSync(path.join(OUT, `${site.indexNowKey}.txt`), site.indexNowKey);
 fs.writeFileSync(path.join(OUT, "favicon.svg"), `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#0b7a5a"/><path d="M18 20v24M28 20v24M38 20v24M48 20v24M14 38l40-12" stroke="#fff" stroke-width="5" stroke-linecap="round"/></svg>`);
 
 console.log(`Built ${pages.length} indexable pages + 404 into dist/ (base URL ${BASE})`);

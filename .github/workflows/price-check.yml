@@ -44,6 +44,14 @@ jobs:
           git commit -m "$COMMIT_MSG"
           git push
 
+      # Pushes made by this workflow do not trigger other workflows, so it pings
+      # search engines itself when a price was updated on the site.
+      - name: Notify search engines of a price update
+        if: steps.check.outputs.changed != 'true' && startsWith(steps.check.outputs.commit_msg, 'Price update')
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: node scripts/indexnow.js
+
       # A change a price alone cannot express (new plan, new limit or fee, implausible price):
       # open a pull request with the snapshots and draft changelog entries. Nothing goes live
       # until it is reviewed and merged. Prices applied automatically in the same run ride along.

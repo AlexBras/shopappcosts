@@ -102,6 +102,112 @@
     }
   },
   {
+    "id": "okendo",
+    "slug": "okendo",
+    "name": "Okendo: Reviews & Loyalty",
+    "short": "Okendo",
+    "cat": "reviews",
+    "rating": "4.8 · 1,444 reviews",
+    "listing": "https://apps.shopify.com/okendo-reviews",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 50 orders/month",
+        "fits": {
+          "orders": 50
+        }
+      },
+      {
+        "name": "Essential",
+        "price": 19,
+        "limits": "Up to 200 orders/month. 14-day trial",
+        "fits": {
+          "orders": 200
+        }
+      },
+      {
+        "name": "Growth",
+        "price": 119,
+        "limits": "Up to 1,500 orders/month; adds AI review summaries, Q&A widget",
+        "fits": {
+          "orders": 1500
+        }
+      },
+      {
+        "name": "Power",
+        "price": 299,
+        "limits": "Up to 3,500 orders/month; adds review campaigns, advanced reporting",
+        "fits": {
+          "orders": 3500
+        }
+      }
+    ],
+    "verdict": "Clear order tiers, but steep: the jump from 200 to 201 orders takes the bill from $19 to $119.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Above 3,500 orders a month: not on the listing (contact Okendo)."
+  },
+  {
+    "id": "stamped",
+    "slug": "stamped",
+    "name": "Stamped Product Reviews & UGC",
+    "short": "Stamped",
+    "cat": "reviews",
+    "rating": "4.7 · 3,749 reviews",
+    "listing": "https://apps.shopify.com/product-reviews-addon",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Reviews",
+        "price": 23,
+        "limits": "Up to 200 orders a month",
+        "fits": {
+          "orders": 200
+        }
+      },
+      {
+        "name": "Reviews (1k)",
+        "price": 99,
+        "limits": "Up to 1,000 orders a month",
+        "fits": {
+          "orders": 1000
+        }
+      },
+      {
+        "name": "Reviews (5k)",
+        "price": 199,
+        "limits": "Up to 5,000 orders a month",
+        "fits": {
+          "orders": 5000
+        }
+      },
+      {
+        "name": "Reviews (20K)",
+        "price": 399,
+        "limits": "Up to 20,000 orders a month",
+        "fits": {
+          "orders": 20000
+        }
+      }
+    ],
+    "verdict": "No free plan: the cheapest option starts at $23, and every tier is set by monthly orders.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Above 20,000 orders a month: not on the listing."
+  },
+  {
     "id": "klaviyo",
     "slug": "klaviyo",
     "name": "Klaviyo",
@@ -207,6 +313,52 @@
     }
   },
   {
+    "id": "mailchimp",
+    "slug": "mailchimp",
+    "name": "Mailchimp: Email & SMS Marketing",
+    "short": "Mailchimp",
+    "cat": "email",
+    "rating": "4.8 · 1,535 reviews",
+    "listing": "https://apps.shopify.com/mailchimp",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Email, sign-up forms, landing pages; contact limit not stated on the listing"
+      },
+      {
+        "name": "Essentials",
+        "price": 13,
+        "limits": "Starts at $13; price based on number of contacts; up to 4 automations",
+        "fits": {},
+        "from": true
+      },
+      {
+        "name": "Standard",
+        "price": 20,
+        "limits": "Starts at $20; up to 200 automations, send time optimization",
+        "fits": {},
+        "from": true
+      },
+      {
+        "name": "Premium",
+        "price": 350,
+        "limits": "Starts at $350; advanced segmentation, unlimited contacts",
+        "fits": {},
+        "from": true
+      }
+    ],
+    "verdict": "Low starting prices, but every paid plan is priced by contacts and the listing only shows where they start.",
+    "watch": "Mailchimp may bill some charges outside your Shopify invoice.",
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
     "id": "recharge",
     "slug": "recharge",
     "name": "Recharge Subscriptions",
@@ -279,6 +431,152 @@
     "source": "Shopify App Store listing",
     "affiliate": {
       "status": "to-contact",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "appstle",
+    "slug": "appstle-subscriptions",
+    "name": "Appstle Subscriptions",
+    "short": "Appstle",
+    "cat": "subscriptions",
+    "rating": "5.0 · 9,113 reviews",
+    "listing": "https://apps.shopify.com/subscriptions-by-appstle",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "FREE",
+        "price": 0,
+        "limits": "Up to $500/month in subscription revenue",
+        "fits": {
+          "subRevenue": 500
+        }
+      },
+      {
+        "name": "STARTER",
+        "price": 10,
+        "limits": "Up to $5,000/month in subscription revenue; 0% transaction fee. 14-day trial",
+        "fits": {
+          "subRevenue": 5000
+        }
+      },
+      {
+        "name": "BUSINESS (Biz)",
+        "price": 30,
+        "limits": "Up to $15,000/month in subscription revenue; bundles, build-a-box",
+        "fits": {
+          "subRevenue": 15000
+        }
+      },
+      {
+        "name": "BUSINESS PREMIUM",
+        "price": 100,
+        "limits": "Up to $100,000/month in subscription revenue",
+        "fits": {
+          "subRevenue": 100000
+        }
+      }
+    ],
+    "verdict": "Priced by subscription revenue, not subscribers, with no transaction fee: very cheap for small and mid-size programs.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Above $100,000/month in subscription revenue: enterprise pricing, not on the listing."
+  },
+  {
+    "id": "loop",
+    "slug": "loop-subscriptions",
+    "name": "Loop Subscriptions",
+    "short": "Loop",
+    "cat": "subscriptions",
+    "rating": "5.0 · 796 reviews",
+    "listing": "https://apps.shopify.com/loop-subscriptions",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free Forever",
+        "price": 0,
+        "limits": "Up to 50 active subscriptions",
+        "fits": {
+          "subs": 50
+        }
+      },
+      {
+        "name": "Starter",
+        "price": 99,
+        "limits": "+ 1.0% per transaction. 14-day trial",
+        "fits": {},
+        "fee": {
+          "pct": 1.0
+        }
+      },
+      {
+        "name": "Pro",
+        "price": 399,
+        "limits": "+ 0.75% per transaction; dedicated CSM",
+        "fits": {},
+        "fee": {
+          "pct": 0.75
+        }
+      }
+    ],
+    "verdict": "Free up to 50 subscriptions, then $99 plus 1% of every renewal: built for brands where retention tools pay for the fee.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "bold",
+    "slug": "bold-subscriptions",
+    "name": "Bold Subscriptions",
+    "short": "Bold",
+    "cat": "subscriptions",
+    "rating": "4.0 · 381 reviews",
+    "listing": "https://apps.shopify.com/bold-subscriptions",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Launch",
+        "price": 24.99,
+        "limits": "+ 2% transaction fee; unlimited subscribers. 30-day trial",
+        "fits": {},
+        "fee": {
+          "pct": 2
+        }
+      },
+      {
+        "name": "Grow",
+        "price": 49.99,
+        "limits": "+ 1% transaction fee",
+        "fits": {},
+        "fee": {
+          "pct": 1
+        }
+      },
+      {
+        "name": "Scale",
+        "price": 74.99,
+        "limits": "+ 0.9% transaction fee",
+        "fits": {},
+        "fee": {
+          "pct": 0.9
+        }
+      }
+    ],
+    "verdict": "No free plan, and every renewal pays a fee: compare its total with fee-free apps once you pass a few dozen subscribers.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
       "program": null,
       "url": null
     }
@@ -384,6 +682,746 @@
     "source": "Shopify App Store listing",
     "affiliate": {
       "status": "none",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "langshop",
+    "slug": "langshop",
+    "name": "LangShop AI Language Translate",
+    "short": "LangShop",
+    "cat": "translation",
+    "rating": "4.5 · 472 reviews",
+    "listing": "https://apps.shopify.com/langshop",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "1 language; unlimited translations for 50 products",
+        "fits": {
+          "langs": 1,
+          "products": 50
+        }
+      },
+      {
+        "name": "Basic",
+        "price": 10,
+        "limits": "10 languages; 250 products. 14-day trial",
+        "fits": {
+          "langs": 10,
+          "products": 250
+        }
+      },
+      {
+        "name": "Standard",
+        "price": 40,
+        "limits": "15 languages; 2,000 products",
+        "fits": {
+          "langs": 15,
+          "products": 2000
+        }
+      },
+      {
+        "name": "Advanced",
+        "price": 75,
+        "limits": "20 languages; 5,000 products",
+        "fits": {
+          "langs": 20,
+          "products": 5000
+        }
+      }
+    ],
+    "verdict": "Priced by products and languages, not words: cheap for small catalogs in many languages.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "More than 20 languages or 5,000 products: larger plans are not shown on the listing."
+  },
+  {
+    "id": "transcy",
+    "slug": "transcy",
+    "name": "Transcy: AI Language Translate",
+    "short": "Transcy",
+    "cat": "translation",
+    "rating": "4.5 · 2,566 reviews",
+    "listing": "https://apps.shopify.com/transcy-multiple-languages",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "1 language and 1 currency; no editing",
+        "fits": {
+          "langs": 1
+        }
+      },
+      {
+        "name": "Regional",
+        "price": 29,
+        "limits": "3 languages; 200 products. 7-day trial",
+        "fits": {
+          "langs": 3,
+          "products": 200
+        }
+      },
+      {
+        "name": "Continental",
+        "price": 69,
+        "limits": "15 languages; 300 products",
+        "fits": {
+          "langs": 15,
+          "products": 300
+        }
+      },
+      {
+        "name": "Cross-Border",
+        "price": 99,
+        "limits": "50 languages; 1,500 products",
+        "fits": {
+          "langs": 50,
+          "products": 1500
+        }
+      }
+    ],
+    "verdict": "Bundles currency conversion with translation; product limits are tight for the price.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "More than 50 languages or 1,500 products: not on the listing."
+  },
+  {
+    "id": "hextom",
+    "slug": "hextom-translate",
+    "name": "Hextom AI Translate & Currency",
+    "short": "Hextom",
+    "cat": "translation",
+    "rating": "4.7 · 1,234 reviews",
+    "listing": "https://apps.shopify.com/translate-my-store",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Auto-translate 3 languages; 3,000 AI words a month",
+        "fits": {
+          "langs": 3,
+          "tw": 3000
+        }
+      },
+      {
+        "name": "Basic",
+        "price": 9.99,
+        "limits": "Auto-translate 10 languages; 20,000 AI words a month. 7-day trial",
+        "fits": {
+          "langs": 10,
+          "tw": 20000
+        }
+      },
+      {
+        "name": "Pro",
+        "price": 19.99,
+        "limits": "Auto-translate 50 languages; 75,000 AI words a month",
+        "fits": {
+          "langs": 50,
+          "tw": 75000
+        }
+      },
+      {
+        "name": "Business",
+        "price": 49.99,
+        "limits": "Auto-translate 133 languages; 250,000 AI words a month",
+        "fits": {
+          "langs": 133,
+          "tw": 250000
+        }
+      }
+    ],
+    "verdict": "The cheapest per word among the apps we track, with a generous free tier.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Over 250,000 AI words a month: not on the listing."
+  },
+  {
+    "id": "smile",
+    "slug": "smile",
+    "name": "Smile: Loyalty Program Rewards",
+    "short": "Smile",
+    "cat": "loyalty",
+    "rating": "4.9 · 4,649 reviews",
+    "listing": "https://apps.shopify.com/smile-io",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "Up to 200 monthly orders; points, rewards and referrals",
+        "fits": {
+          "orders": 200
+        }
+      },
+      {
+        "name": "Essential",
+        "price": 15,
+        "limits": "Up to 500 monthly orders; 1 integration. 14-day trial",
+        "fits": {
+          "orders": 500
+        }
+      },
+      {
+        "name": "Standard",
+        "price": 79,
+        "limits": "Up to 1,000 monthly orders; 2 integrations",
+        "fits": {
+          "orders": 1000
+        }
+      },
+      {
+        "name": "Growth",
+        "price": 199,
+        "limits": "2,500 monthly orders included, then $20 per additional 100 orders; VIP tiers",
+        "fits": {
+          "orders": 2500
+        },
+        "over": {
+          "key": "orders",
+          "per": 100,
+          "price": 20
+        }
+      }
+    ],
+    "verdict": "The best-known loyalty app, with a free plan up to 200 orders; past 2,500 orders every 100 orders adds $20.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "loyaltylion",
+    "slug": "loyaltylion",
+    "name": "LoyaltyLion Loyalty Program",
+    "short": "LoyaltyLion",
+    "cat": "loyalty",
+    "rating": "4.7 · 543 reviews",
+    "listing": "https://apps.shopify.com/loyaltylion",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free plan",
+        "price": 0,
+        "limits": "400 monthly orders; points and discount rewards",
+        "fits": {
+          "orders": 400
+        }
+      },
+      {
+        "name": "Classic",
+        "price": 199,
+        "limits": "Up to 500 orders per month; VIP tiers, Klaviyo flows. 14-day trial",
+        "fits": {
+          "orders": 500
+        }
+      }
+    ],
+    "verdict": "Free up to 400 orders, then a single $199 plan; above 500 orders the price is quote-only.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Above 500 orders a month: custom quote (Advanced or Plus plans)."
+  },
+  {
+    "id": "growave",
+    "slug": "growave",
+    "name": "Growave: Loyalty & Wishlist",
+    "short": "Growave",
+    "cat": "loyalty",
+    "rating": "4.8 · 1,289 reviews",
+    "listing": "https://apps.shopify.com/growave",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "100% FREE FOREVER",
+        "price": 0,
+        "limits": "200 orders/month; loyalty, wishlist and reviews",
+        "fits": {
+          "orders": 200
+        }
+      },
+      {
+        "name": "ENTRY",
+        "price": 15,
+        "limits": "500 monthly orders included, then $20 per additional 100 orders",
+        "fits": {
+          "orders": 500
+        },
+        "over": {
+          "key": "orders",
+          "per": 100,
+          "price": 20
+        }
+      },
+      {
+        "name": "GROWTH",
+        "price": 199,
+        "limits": "1,500 monthly orders included, then $15 per additional 100 orders",
+        "fits": {
+          "orders": 1500
+        },
+        "over": {
+          "key": "orders",
+          "per": 100,
+          "price": 15
+        }
+      },
+      {
+        "name": "PLUS",
+        "price": 499,
+        "limits": "3,000 monthly orders included, then $10 per additional 100 orders",
+        "fits": {
+          "orders": 3000
+        },
+        "over": {
+          "key": "orders",
+          "per": 100,
+          "price": 10
+        }
+      }
+    ],
+    "verdict": "Loyalty, wishlist and reviews in one app: it can replace a reviews app, which changes the math.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "reconvert",
+    "slug": "reconvert",
+    "name": "ReConvert Post Purchase Upsell",
+    "short": "ReConvert",
+    "cat": "upsell",
+    "rating": "4.8 · 3,119 reviews",
+    "listing": "https://apps.shopify.com/reconvert-upsell-cross-sell",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "FREE",
+        "price": 0,
+        "limits": "Up to 50 orders or $50 upsell revenue",
+        "fits": {
+          "orders": 50
+        }
+      },
+      {
+        "name": "GROWTH 51-100",
+        "price": 9.99,
+        "limits": "51–100 store orders. 14-day trial",
+        "fits": {
+          "orders": 100
+        }
+      },
+      {
+        "name": "GROWTH 101-200",
+        "price": 19.99,
+        "limits": "101–200 store orders",
+        "fits": {
+          "orders": 200
+        }
+      },
+      {
+        "name": "GROWTH 201-500",
+        "price": 39.99,
+        "limits": "201–500 store orders",
+        "fits": {
+          "orders": 500
+        }
+      }
+    ],
+    "verdict": "Every feature on every plan, priced by store orders: cheap for small stores.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    },
+    "beyond": "Above 500 orders a month: higher tiers are not on the listing."
+  },
+  {
+    "id": "fbt",
+    "slug": "frequently-bought-together",
+    "name": "Frequently Bought Together CBB",
+    "short": "Frequently Bought Together",
+    "cat": "upsell",
+    "rating": "4.9 · 1,210 reviews",
+    "listing": "https://apps.shopify.com/frequently-bought-together",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": 0,
+        "limits": "Test plan: max 3 manual bundles, basic widget",
+        "testOnly": true
+      },
+      {
+        "name": "Professional I",
+        "price": 9.99,
+        "limits": "Up to 50 orders/month; unlimited bundles. 14-day trial",
+        "fits": {
+          "orders": 50
+        }
+      },
+      {
+        "name": "Professional II",
+        "price": 24.99,
+        "limits": "Up to 500 orders/month",
+        "fits": {
+          "orders": 500
+        }
+      },
+      {
+        "name": "Professional III",
+        "price": 39.99,
+        "limits": "500+ orders/month",
+        "fits": {}
+      }
+    ],
+    "verdict": "Simple bundle widget with a flat ceiling: never more than $39.99, whatever your volume.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "zipify",
+    "slug": "zipify-ocu",
+    "name": "One Click Upsell – Zipify OCU",
+    "short": "Zipify OCU",
+    "cat": "upsell",
+    "rating": "4.5 · 571 reviews",
+    "listing": "https://apps.shopify.com/zipify-oneclickupsell",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Development Stores",
+        "price": 0,
+        "limits": "For development and partner stores only",
+        "testOnly": true
+      },
+      {
+        "name": "Upsell up to $200",
+        "price": 9.95,
+        "limits": "Up to $200 a month in upsell revenue. 30-day trial",
+        "fits": {
+          "upsellRev": 200
+        }
+      },
+      {
+        "name": "Upsell $200-2,500",
+        "price": 25,
+        "limits": "$25 to $99 as upsell revenue grows from $200 to $2,500 a month",
+        "fits": {
+          "upsellRev": 2500
+        },
+        "from": true
+      },
+      {
+        "name": "Upsell $2,500+",
+        "price": 149,
+        "limits": "From $149 above $2,500 a month in upsell revenue; capped at $999",
+        "fits": {},
+        "from": true
+      }
+    ],
+    "verdict": "Priced by the upsell revenue it brings in, not by orders: you pay more only when it earns more.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "pagefly",
+    "slug": "pagefly",
+    "name": "PageFly AI Page Builder",
+    "short": "PageFly",
+    "cat": "builders",
+    "rating": "4.9 · 5,919 reviews",
+    "listing": "https://apps.shopify.com/pagefly",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "1 published page or section",
+        "fits": {
+          "pages": 1
+        }
+      },
+      {
+        "name": "Builder",
+        "price": 24,
+        "limits": "5 published pages or sections, then $5 per 5 extra",
+        "fits": {
+          "pages": 5
+        },
+        "over": {
+          "key": "pages",
+          "per": 5,
+          "price": 5
+        }
+      },
+      {
+        "name": "Accelerate",
+        "price": 99,
+        "limits": "Unlimited published pages; A/B testing, heatmaps",
+        "fits": {}
+      },
+      {
+        "name": "Enterprise",
+        "price": 299,
+        "limits": "Unlimited pages; priority support",
+        "fits": {}
+      }
+    ],
+    "verdict": "The most installed page builder; $24 covers 5 pages, and extra pages cost about $1 each.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "gempages",
+    "slug": "gempages",
+    "name": "GemPages Landing Page Builder",
+    "short": "GemPages",
+    "cat": "builders",
+    "rating": "4.9 · 4,261 reviews",
+    "listing": "https://apps.shopify.com/gempages",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "1 published page",
+        "fits": {
+          "pages": 1
+        }
+      },
+      {
+        "name": "Build",
+        "price": 29,
+        "limits": "Unlimited published pages; 20 theme sections",
+        "fits": {}
+      },
+      {
+        "name": "Optimize",
+        "price": 59,
+        "limits": "Unlimited pages; scheduled publishing, 100 theme sections",
+        "fits": {}
+      },
+      {
+        "name": "Enterprise",
+        "price": 199,
+        "limits": "Unlimited theme sections; priority support",
+        "fits": {}
+      }
+    ],
+    "verdict": "Unlimited pages from $29: the cheapest option once you publish more than a handful of pages.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "shogun",
+    "slug": "shogun",
+    "name": "Shogun Landing Page Builder",
+    "short": "Shogun",
+    "cat": "builders",
+    "rating": "4.8 · 1,971 reviews",
+    "listing": "https://apps.shopify.com/shogun",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Draft Mode",
+        "price": 0,
+        "limits": "Draft pages only; no publishing",
+        "fits": {
+          "pages": 0
+        },
+        "testOnly": true
+      },
+      {
+        "name": "Build",
+        "price": 39,
+        "limits": "25 published pages. 10-day trial",
+        "fits": {
+          "pages": 25
+        }
+      },
+      {
+        "name": "Grow",
+        "price": 199,
+        "limits": "Unlimited published pages; content scheduling",
+        "fits": {}
+      },
+      {
+        "name": "Advanced",
+        "price": 499,
+        "limits": "Content syncing between stores, custom CMS",
+        "fits": {}
+      }
+    ],
+    "verdict": "No free publishing, and unlimited pages cost $199: aimed at larger content-heavy stores.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "pluginseo",
+    "slug": "plug-in-seo",
+    "name": "Plug in SEO – SEO Audit & Fix",
+    "short": "Plug in SEO",
+    "cat": "seo",
+    "rating": "4.6 · 674 reviews",
+    "listing": "https://apps.shopify.com/plug-in-seo",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": 4.99,
+        "limits": "Scan up to 30 pages; 1 monthly audit. 7-day trial"
+      },
+      {
+        "name": "Lite",
+        "price": 29.99,
+        "limits": "Scan up to 200 pages; bulk AI alt text and URLs"
+      },
+      {
+        "name": "Standard",
+        "price": 49.99,
+        "limits": "Scan up to 2,000 pages; speed reports"
+      },
+      {
+        "name": "Premium",
+        "price": 79.99,
+        "limits": "Scan unlimited pages"
+      }
+    ],
+    "verdict": "No free plan, but a $4.99 entry tier; plans scale with the number of pages scanned.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "searchpie",
+    "slug": "searchpie",
+    "name": "SearchPie: AI SEO & Schema",
+    "short": "SearchPie",
+    "cat": "seo",
+    "rating": "4.9 · 2,453 reviews",
+    "listing": "https://apps.shopify.com/seo-booster",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Starter",
+        "price": 0,
+        "limits": "SEO health score, store schema, image compression, IndexNow"
+      },
+      {
+        "name": "Premium",
+        "price": 39,
+        "limits": "Price, rating and FAQ schema; auto-fix broken links. 7-day trial"
+      },
+      {
+        "name": "Enterprise",
+        "price": 99,
+        "limits": "Unlimited image compression; keyword tracking"
+      }
+    ],
+    "verdict": "A free plan that already covers schema, sitemaps and image compression.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
+      "program": null,
+      "url": null
+    }
+  },
+  {
+    "id": "avada",
+    "slug": "avada-seo",
+    "name": "Avada AI SEO Image Optimizer",
+    "short": "Avada SEO",
+    "cat": "seo",
+    "rating": "4.9 · 4,683 reviews",
+    "listing": "https://apps.shopify.com/avada-seo-suite",
+    "checked": "2026-10-27",
+    "plans": [
+      {
+        "name": "Free",
+        "price": 0,
+        "limits": "100 image optimizations; meta tags, HTML sitemap"
+      },
+      {
+        "name": "Pro",
+        "price": 34.95,
+        "limits": "Unlimited image optimization; XML sitemap, broken links. 7-day trial"
+      },
+      {
+        "name": "Enterprise",
+        "price": 99,
+        "limits": "10,000 AI credits; one-on-one consulting"
+      }
+    ],
+    "verdict": "Strongest on image optimization; the free plan stops at 100 images.",
+    "watch": null,
+    "source": "Shopify App Store listing",
+    "affiliate": {
+      "status": "to-check",
       "program": null,
       "url": null
     }

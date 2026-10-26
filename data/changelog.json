@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-10-27",
+    "app": null,
+    "title": "Tracking expands to 32 apps in 8 categories",
+    "body": "Added 21 apps read from their Shopify App Store listings: Okendo, Stamped, Mailchimp, Appstle, Loop, Bold, LangShop, Transcy, Hextom, Smile, LoyaltyLion, Growave, ReConvert, Frequently Bought Together, Zipify OCU, PageFly, GemPages, Shogun, Plug in SEO, SearchPie and Avada SEO. New categories: loyalty, upsell, page builders and SEO.",
+    "source": null
+  },
+  {
     "date": "2026-10-26",
     "app": "omnisend",
     "title": "Omnisend: legacy Pro SMS credits end today",

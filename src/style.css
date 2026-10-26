@@ -119,3 +119,11 @@ footer.site a{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 .wrap>*{min-width:0;max-width:100%}
 .stack{display:flex;flex-direction:column;gap:56px;min-width:0}
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px 32px;max-width:100%}
+.faq div{display:flex;flex-direction:column;gap:6px;min-width:0}
+.faq h3{font-size:1rem}
+.faq p{color:var(--muted);font-size:.95rem}
+.rgroup h3{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.inc{font:500 .75rem var(--f-mono);color:var(--muted);display:inline-flex;gap:6px;align-items:center;cursor:pointer;white-space:nowrap}
+.rgroup.off .rrow{opacity:.55}
+.rgroup.off .rrow.best .name::after{content:none}

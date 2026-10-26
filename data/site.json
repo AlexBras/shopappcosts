@@ -14,7 +14,8 @@
     "subs": 120,
     "aov": 45,
     "words": 8000,
-    "langs": 1
+    "langs": 1,
+    "products": 40
   },
   "contactEmail": "hello@shopappcosts.com",
   "verificationMeta": [
@@ -26,5 +27,6 @@
       "name": "impact-site-verification",
       "value": "fcea182b-3d11-4640-b484-da8fe816c210"
     }
-  ]
+  ],
+  "indexNowKey": "7214b62ece5da8e3d9b94ddb66f1c2f7"
 }

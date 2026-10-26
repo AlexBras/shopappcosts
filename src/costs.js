@@ -9,22 +9,80 @@
   const usd2 = v => "$" + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const n = v => v.toLocaleString("en-US");
 
-  /* Prices by app id and plan name, e.g. { loox: { Convert: 49.99 } }. */
-  let PRICES = {};
-  function setPrices(map) { PRICES = map || {}; }
+  /* App data from data/apps.json: { id, cat, plans:[{name, price, from?, fits?, over?, fee?}] }.
+     Apps with a hand-written rule below (the first 11) only take their prices from it.
+     Every other app is priced by generic() from its plans' "fits", "over" and "fee" fields. */
+  let APPS = [];
+  let BY_ID = {};
+  function setApps(apps) {
+    APPS = (apps || []).map(a => ({ id: a.id, cat: a.cat, beyond: a.beyond,
+      plans: a.plans.map(p => ({ name: p.name, price: p.price, from: p.from, fits: p.fits, over: p.over, fee: p.fee, limits: p.limits })) }));
+    BY_ID = Object.fromEntries(APPS.map(a => [a.id, a]));
+  }
+  /* Kept for older callers: a { id: { plan: price } } map is turned into app records. */
+  function setPrices(map) {
+    setApps(Object.entries(map || {}).map(([id, plans]) => ({ id, plans: Object.entries(plans).map(([name, price]) => ({ name, price })) })));
+  }
   function pricesFromApps(apps) {
     const m = {};
     for (const a of apps) { m[a.id] = {}; for (const p of a.plans) m[a.id][p.name] = p.price; }
     return m;
   }
   function P(id, plan) {
-    const v = PRICES[id] && PRICES[id][plan];
-    if (typeof v !== "number") throw new Error(`No price for ${id} / ${plan} in data/apps.json`);
-    return v;
+    const a = BY_ID[id], p = a && a.plans.find(x => x.name === plan);
+    if (!p || typeof p.price !== "number") throw new Error(`No price for ${id} / ${plan} in data/apps.json`);
+    return p.price;
+  }
+
+  /* Values a plan limit can refer to. */
+  function measure(v, key) {
+    switch (key) {
+      case "tw": return v.words * v.langs;                 /* translated words */
+      case "subRevenue": return v.subs * v.aov;           /* monthly subscription revenue */
+      default: return v[key] || 0;
+    }
+  }
+  const UNIT = { orders: "orders", contacts: "contacts", emails: "emails", subs: "subscribers", langs: "languages", tw: "translated words",
+    subRevenue: "in subscription revenue", products: "products", pages: "published pages", upsellRev: "in upsell revenue" };
+  const money = k => k === "subRevenue" || k === "upsellRev";
+  const amt = (k, x) => (money(k) ? "$" + n(x) : n(x));
+
+  /* Cheapest plan whose limits fit the store. A plan without "fits" is never picked
+     (its limits are not volume-based, or not published). fits:{} means no limit. */
+  function generic(app, v) {
+    let best = null;
+    for (const p of app.plans) {
+      if (!p.fits) continue;
+      let ok = true, extra = 0, detail = [];
+      for (const [k, max] of Object.entries(p.fits)) {
+        const x = measure(v, k);
+        if (x <= max) continue;
+        if (p.over && p.over.key === k) {
+          const blocks = Math.ceil((x - max) / p.over.per);
+          extra += blocks * p.over.price;
+          detail.push(`${usd(p.over.price)} × ${blocks} blocks of ${n(p.over.per)} ${UNIT[k] || k} above ${amt(k, max)}`);
+          continue;
+        }
+        ok = false; break;
+      }
+      if (!ok) continue;
+      let fee = 0;
+      if (p.fee && v.subs > 0) {
+        fee = v.subs * (v.aov * p.fee.pct / 100 + (p.fee.fixed || 0));
+        detail.push(`${n(v.subs)} renewals × ${p.fee.pct}% of ${usd2(v.aov)}${p.fee.fixed ? ` + ${usd2(p.fee.fixed)}` : ""} = ${usd2(fee)} in fees`);
+      }
+      const cost = p.price + extra + fee;
+      if (!best || cost < best.cost) best = { cost, p, detail };
+    }
+    if (!best) return { id: app.id, cost: null, why: app.beyond || "Beyond the plans published on the listing." };
+    const head = best.p.price === 0 && !best.detail.length ? `${best.p.name} plan` : `${best.p.name}: ${best.p.from ? "from " : ""}${usd(best.p.price)}`;
+    const lim = best.p.limits ? ` (${best.p.limits.replace(/\.$/, "")})` : "";
+    return { id: app.id, cost: best.cost, from: !!best.p.from,
+      why: best.detail.length ? `${head} + ${best.detail.join(" + ")}.` : `${head}${lim}.` };
   }
 
   function costs(input) {
-    const v = Object.assign({ orders: 0, contacts: 0, emails: 0, subs: 0, aov: 0, words: 0, langs: 0 }, input);
+    const v = Object.assign({ orders: 0, contacts: 0, emails: 0, subs: 0, aov: 0, words: 0, langs: 0, products: 0, pages: 0, upsellRev: 0 }, input);
     const out = { reviews: [], email: [], subscriptions: [], translation: [] };
 
     /* Reviews */
@@ -97,6 +155,16 @@
         ? "Free automatic translation for up to 2 languages."
         : "Free, but automatic translation covers only 2 languages: the rest must be translated by hand." });
     }
+
+    /* Every other app: generic pricing from its plan data, in data order. */
+    const custom = new Set(Object.values(out).flat().map(r => r.id));
+    for (const a of APPS) {
+      if (custom.has(a.id) || !a.cat) continue;
+      (out[a.cat] || (out[a.cat] = [])).push(generic(a, v));
+    }
+    /* Rows follow the order of data/apps.json within each category. */
+    const order = Object.fromEntries(APPS.map((a, i) => [a.id, i]));
+    for (const k of Object.keys(out)) out[k].sort((a, b) => (order[a.id] ?? 0) - (order[b.id] ?? 0));
     return out;
   }
 
@@ -109,7 +177,7 @@
     return known.length ? known.reduce((a, b) => (b.cost < a.cost ? b : a)) : null;
   }
 
-  const api = { costs, cheapest, usd2, setPrices, pricesFromApps };
+  const api = { costs, cheapest, usd2, usd, setApps, setPrices, pricesFromApps, generic };
   if (typeof module === "object" && module.exports) module.exports = api;
   else root.AppCosts = api;
 })(typeof window !== "undefined" ? window : globalThis);

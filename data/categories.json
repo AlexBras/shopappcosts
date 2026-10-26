@@ -40,7 +40,9 @@
         }
       }
     ],
-    "metaTitle": "Shopify review apps: real monthly cost compared"
+    "metaTitle": "Shopify review apps: real monthly cost compared",
+    "noun": "review app",
+    "core": true
   },
   {
     "id": "email",
@@ -81,7 +83,9 @@
         }
       }
     ],
-    "metaTitle": "Shopify email apps: real monthly cost compared"
+    "metaTitle": "Shopify email apps: real monthly cost compared",
+    "noun": "email marketing app",
+    "core": true
   },
   {
     "id": "subscriptions",
@@ -123,47 +127,193 @@
       }
     ],
     "scenarioNote": "Assumes one renewal per subscriber per month at a $45 average order.",
-    "metaTitle": "Shopify subscription apps: real cost incl. fees"
+    "metaTitle": "Shopify subscription apps: real cost incl. fees",
+    "noun": "subscription app",
+    "core": true
   },
   {
     "id": "translation",
     "slug": "shopify-translation-apps",
     "title": "Translation",
     "seoTitle": "Shopify translation apps compared: real monthly cost by words and languages",
-    "lede": "Sell in more languages. Pricing depends on words translated and the number of languages.",
+    "lede": "Sell in more languages. Pricing depends on words translated, the number of languages and, for some apps, the number of products.",
     "watch": "Word limits usually count every translated word, so 10,000 words in 2 languages uses 20,000.",
     "driver": "words",
-    "driverLabel": "words × languages",
+    "driverLabel": "words, languages and products",
     "scenarios": [
       {
-        "label": "8,000 words · 1 language",
+        "label": "8,000 words · 1 language · 40 products",
         "v": {
           "words": 8000,
-          "langs": 1
+          "langs": 1,
+          "products": 40
         }
       },
       {
-        "label": "8,000 words · 2 languages",
+        "label": "8,000 words · 2 languages · 40 products",
         "v": {
           "words": 8000,
-          "langs": 2
+          "langs": 2,
+          "products": 40
         }
       },
       {
-        "label": "15,000 words · 3 languages",
+        "label": "15,000 words · 3 languages · 80 products",
         "v": {
           "words": 15000,
-          "langs": 3
+          "langs": 3,
+          "products": 80
         }
       },
       {
-        "label": "35,000 words · 5 languages",
+        "label": "35,000 words · 5 languages · 200 products",
         "v": {
           "words": 35000,
-          "langs": 5
+          "langs": 5,
+          "products": 200
         }
       }
     ],
-    "metaTitle": "Shopify translation apps: real monthly cost compared"
+    "metaTitle": "Shopify translation apps: real monthly cost compared",
+    "noun": "translation app",
+    "core": true
+  },
+  {
+    "id": "loyalty",
+    "slug": "shopify-loyalty-apps",
+    "title": "Loyalty & rewards",
+    "seoTitle": "Shopify loyalty apps compared: real monthly cost by order volume",
+    "metaTitle": "Shopify loyalty apps: real monthly cost compared",
+    "lede": "Points, rewards, referrals and VIP tiers. Pricing depends on monthly orders.",
+    "watch": "Several loyalty apps charge per extra 100 orders above an included amount: the bill keeps rising with your volume.",
+    "driver": "orders",
+    "driverLabel": "orders / month",
+    "scenarios": [
+      {
+        "label": "150 orders",
+        "v": {
+          "orders": 150
+        }
+      },
+      {
+        "label": "450 orders",
+        "v": {
+          "orders": 450
+        }
+      },
+      {
+        "label": "900 orders",
+        "v": {
+          "orders": 900
+        }
+      },
+      {
+        "label": "2,000 orders",
+        "v": {
+          "orders": 2000
+        }
+      },
+      {
+        "label": "4,000 orders",
+        "v": {
+          "orders": 4000
+        }
+      }
+    ],
+    "noun": "loyalty app"
+  },
+  {
+    "id": "upsell",
+    "slug": "shopify-upsell-apps",
+    "title": "Upsell & bundles",
+    "seoTitle": "Shopify upsell apps compared: real monthly cost by orders and upsell revenue",
+    "metaTitle": "Shopify upsell apps: real monthly cost compared",
+    "lede": "Post-purchase offers, bundles and cross-sells. Pricing depends on orders or on the upsell revenue the app brings in.",
+    "watch": "Some apps price by orders, others by upsell revenue: compare them at your own numbers, not at their starting price.",
+    "driver": "orders",
+    "driverLabel": "orders and upsell revenue",
+    "scenarios": [
+      {
+        "label": "40 orders · $100 upsell revenue",
+        "v": {
+          "orders": 40,
+          "upsellRev": 100
+        }
+      },
+      {
+        "label": "180 orders · $400 upsell revenue",
+        "v": {
+          "orders": 180,
+          "upsellRev": 400
+        }
+      },
+      {
+        "label": "450 orders · $1,500 upsell revenue",
+        "v": {
+          "orders": 450,
+          "upsellRev": 1500
+        }
+      },
+      {
+        "label": "1,500 orders · $6,000 upsell revenue",
+        "v": {
+          "orders": 1500,
+          "upsellRev": 6000
+        }
+      }
+    ],
+    "scenarioNote": "Upsell revenue is the extra revenue the app's offers generate each month.",
+    "noun": "upsell app"
+  },
+  {
+    "id": "builders",
+    "slug": "shopify-page-builder-apps",
+    "title": "Page builders",
+    "seoTitle": "Shopify page builder apps compared: real monthly cost by published pages",
+    "metaTitle": "Shopify page builder apps: real monthly cost compared",
+    "lede": "Landing pages, product pages and sections without code. Pricing depends on how many pages you publish.",
+    "watch": "Free plans publish one page at most: count the pages you will keep live, not the ones you will draft.",
+    "driver": "pages",
+    "driverLabel": "published pages",
+    "scenarios": [
+      {
+        "label": "1 page",
+        "v": {
+          "pages": 1
+        }
+      },
+      {
+        "label": "5 pages",
+        "v": {
+          "pages": 5
+        }
+      },
+      {
+        "label": "12 pages",
+        "v": {
+          "pages": 12
+        }
+      },
+      {
+        "label": "30 pages",
+        "v": {
+          "pages": 30
+        }
+      }
+    ],
+    "noun": "page builder app"
+  },
+  {
+    "id": "seo",
+    "slug": "shopify-seo-apps",
+    "title": "SEO",
+    "seoTitle": "Shopify SEO apps compared: every plan and price",
+    "metaTitle": "Shopify SEO apps: every plan and price compared",
+    "lede": "Meta tags, schema, image compression and audits. Pricing depends on features, not on your store's volume.",
+    "watch": "SEO apps sell features, not capacity: start on a free or entry plan and upgrade only for a feature you will use.",
+    "driver": null,
+    "driverLabel": "features",
+    "scenarios": [],
+    "noun": "SEO app"
   }
 ]
