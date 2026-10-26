@@ -121,12 +121,20 @@ function rewordTexts(app, plan, from, to) {
 
 /* ---------- main ---------- */
 async function fetchListing(url) {
-  const res = await fetch(url, {
-    headers: { "User-Agent": "Mozilla/5.0 (compatible; price-check; +https://github.com)", "Accept-Language": "en-US,en;q=0.9" },
-    redirect: "follow", signal: AbortSignal.timeout(30000)
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.text();
+  /* Shopify answers 429 when listings are read too fast: wait and retry, up to 3 times. */
+  for (let attempt = 0; ; attempt++) {
+    const res = await fetch(url, {
+      headers: { "User-Agent": "Mozilla/5.0 (compatible; price-check; +https://github.com)", "Accept-Language": "en-US,en;q=0.9" },
+      redirect: "follow", signal: AbortSignal.timeout(30000)
+    });
+    if (res.status === 429 && attempt < 3) {
+      const wait = (Number(res.headers.get("retry-after")) || 20 * (attempt + 1)) * 1000;
+      await new Promise(r => setTimeout(r, Math.min(wait, 90000)));
+      continue;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.text();
+  }
 }
 
 async function main() {
@@ -138,7 +146,8 @@ async function main() {
   fs.mkdirSync(SNAP, { recursive: true });
 
   const changes = [], baselines = [], failures = [], autoApplied = [];
-  for (const a of apps) {
+  for (const [i, a] of apps.entries()) {
+    if (i) await new Promise(r => setTimeout(r, 2000)); /* be gentle with the App Store */
     const st = status.apps[a.id] || (status.apps[a.id] = {});
     st.lastAttempt = today;
     let lines;
@@ -189,7 +198,7 @@ async function main() {
         const removed = prev.lines.filter(l => !lines.includes(l));
         const added = lines.filter(l => !prev.lines.includes(l));
         changes.push({ a, removed, added, reason: verdict.reason });
-        const short = arr => arr.slice(0, 6).join(" · ") + (arr.length > 6 ? " …" : "");
+        const short = arr => arr.slice(0, 6).map(l => l.replace(/\.$/, "")).join(" · ") + (arr.length > 6 ? " …" : "");
         changelog.unshift({
           date: today, app: a.id,
           title: `${a.short}: pricing changed on the listing`,

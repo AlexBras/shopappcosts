@@ -153,7 +153,7 @@
             : { id: "langify", cost: null, why: "Over 200,000 words: not covered by listed plans." });
       out.translation.push({ id: "translate", cost: 0, why: v.langs <= 2
         ? "Free automatic translation for up to 2 languages."
-        : "Free, but automatic translation covers only 2 languages: the rest must be translated by hand." });
+        : "Free, but automatic translation covers 2 languages (8 in select countries): the rest may need translating by hand." });
     }
 
     /* Every other app: generic pricing from its plan data, in data order. */
