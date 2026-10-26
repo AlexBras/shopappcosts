@@ -5,7 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
-const { costs, cheapest, usd2 } = require("./src/costs.js");
+const { costs, cheapest, usd2, setPrices, pricesFromApps } = require("./src/costs.js");
 
 const ROOT = __dirname;
 const OUT = path.join(ROOT, "dist");
@@ -34,6 +34,7 @@ const BASE = (process.env.SITE_URL || site.baseUrl).replace(/\/$/, "");
 
 const byId = Object.fromEntries(APPS.map(a => [a.id, a]));
 const catById = Object.fromEntries(CATS.map(c => [c.id, c]));
+setPrices(pricesFromApps(APPS)); /* the calculator reads plan prices from data/apps.json */
 
 /* ---------- helpers ---------- */
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -164,7 +165,8 @@ function calculatorBlock() {
   const d = site.defaultScenario;
   const meta = {
     cats: CATS.map(c => ({ id: c.id, title: c.title, url: catUrl(c) })),
-    apps: Object.fromEntries(APPS.map(a => [a.id, { short: a.short, url: appUrl(a) }]))
+    apps: Object.fromEntries(APPS.map(a => [a.id, { short: a.short, url: appUrl(a) }])),
+    prices: pricesFromApps(APPS)
   };
   const f = (id, label, val, small, extra = "") =>
     `<div class="field"><label for="c-${id}">${label}</label><input id="c-${id}" name="${id}" type="number" min="0" value="${val}" inputmode="numeric"${extra}>${small ? `<small>${small}</small>` : ""}</div>`;

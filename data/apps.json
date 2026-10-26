@@ -219,7 +219,8 @@
       {
         "name": "Entry plan",
         "price": 25,
-        "limits": "No transaction fee for the first 50 subscribers"
+        "limits": "No transaction fee for the first 50 subscribers",
+        "listingName": "25-50"
       },
       {
         "name": "Starter",
@@ -254,7 +255,8 @@
       {
         "name": "Free",
         "price": 0,
-        "limits": "Up to 50 subscriptions"
+        "limits": "Up to 50 subscriptions",
+        "listingName": "Free for life!"
       },
       {
         "name": "Supersale",

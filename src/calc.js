@@ -5,7 +5,8 @@
   const out = document.getElementById("results");
   if (!form || !out) return;
   const meta = JSON.parse(document.getElementById("calc-meta").textContent);
-  const { costs, cheapest, usd2 } = window.AppCosts;
+  const { costs, cheapest, usd2, setPrices } = window.AppCosts;
+  setPrices(meta.prices);
   const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const fields = ["orders", "contacts", "emails", "subs", "aov", "words", "langs"];
 

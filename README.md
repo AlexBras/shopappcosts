@@ -62,18 +62,19 @@ Alternative à Cloudflare : `netlify.toml` est prêt pour Netlify (même build, 
 | Quoi | Quand | Ce que tu fais |
 |---|---|---|
 | **Relevé des prix** (`price-check.yml`) | Tous les jours, 22 h 17 à Nouméa | Rien s'il n'y a pas de changement : la date « Last checked » du site avance toute seule. |
-| **Journal des prix** | Quand un prix change sur une fiche | Une *pull request* s'ouvre (tu reçois un e-mail) avec l'avant/après et l'entrée de journal déjà rédigée. Tu mets à jour le plan dans `data/apps.json` (directement dans GitHub, bouton crayon), puis **Merge** : le site et le journal sont publiés. |
+| **Mise à jour des prix** | Quand seul un prix change sur une fiche (mêmes plans, mêmes limites, nouveau prix plausible) | Rien : le prix, le calculateur, les comparatifs, les textes qui citaient l'ancien prix et le journal sont mis à jour et publiés le soir même. |
+| **Changement de structure** | Nouveau plan, plan supprimé, nouvelle limite ou nouveaux frais, prix aberrant | Une *pull request* s'ouvre (tu reçois un e-mail) avec l'avant/après et la raison. Ajuster `data/apps.json` (et la règle dans `src/costs.js` si besoin), puis **Merge**. |
 | **Mise en ligne** | À chaque modification du dépôt | Rien. |
 | **Rapport hebdo** (`weekly-report.yml`) | Lundi 6 h 43 à Nouméa | Le lire : changements de la semaine, validations en attente, fiches illisibles, état du site en ligne. |
 
-Pourquoi une validation humaine pour les changements de prix : le robot détecte qu'une fiche a changé, mais une nouvelle règle (palier, frais) peut demander d'ajuster le calculateur (`src/costs.js`). Publier un mauvais chiffre coûterait plus cher que 2 minutes de relecture.
+Pourquoi une validation humaine pour les changements de structure : un nouveau palier ou de nouveaux frais changent la règle de calcul elle-même, et publier un calcul faux coûterait plus cher que 2 minutes de relecture. Les prix, eux, ne sont écrits qu'à un seul endroit (`data/apps.json`) : le calculateur les y lit.
 
 Si une fiche ne se lit plus (Shopify qui change sa page ou bloque le robot), elle apparaît dans le rapport hebdo et sa date « checked » cesse d'avancer : le site n'affiche jamais une vérification qui n'a pas eu lieu.
 
 ## Mettre à jour un prix
 
 1. Modifier le plan dans `data/apps.json` et la date `checked` de l'app.
-2. Si la règle de calcul change (seuil, palier, frais), modifier la règle correspondante dans `src/costs.js`. Le calculateur et toutes les pages statiques utilisent ce même fichier.
+2. Si la règle de calcul change (seuil, palier, frais), modifier la règle correspondante dans `src/costs.js`. Les prix eux-mêmes ne sont jamais écrits dans `src/costs.js` : il les lit dans `data/apps.json`.
 3. Ajouter une entrée datée dans `data/changelog.json` (avec `app` = id de l'app pour qu'elle apparaisse aussi sur sa page).
 4. Mettre `lastChecked` à jour dans `data/site.json`, rebuild, déployer (automatique si Git).
 

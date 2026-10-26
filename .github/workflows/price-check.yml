@@ -30,20 +30,23 @@ jobs:
       - name: Make sure the site still builds
         run: node build.js
 
-      # No price change: save today's check dates on main. Cloudflare Pages redeploys,
-      # so "Last checked" on the site moves forward.
-      - name: Save check dates
+      # Nothing that needs a human: save today's check dates and any price applied
+      # automatically on main. Cloudflare Pages redeploys the site within a couple of minutes.
+      - name: Save check dates and automatic price updates
         if: steps.check.outputs.changed != 'true'
+        env:
+          COMMIT_MSG: ${{ steps.check.outputs.commit_msg }}
         run: |
           git config user.name "price-check-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/check-status.json data/snapshots
+          git add data/check-status.json data/snapshots data/apps.json data/changelog.json
           if git diff --cached --quiet; then echo "Nothing to save"; exit 0; fi
-          git commit -m "Daily price check: no pricing change"
+          git commit -m "$COMMIT_MSG"
           git push
 
-      # Price change: open a pull request with the new snapshots and draft changelog entries.
-      # Nothing goes live until you review and merge it.
+      # A change a price alone cannot express (new plan, new limit or fee, implausible price):
+      # open a pull request with the snapshots and draft changelog entries. Nothing goes live
+      # until it is reviewed and merged. Prices applied automatically in the same run ride along.
       - name: Open a pull request for the change
         if: steps.check.outputs.changed == 'true'
         uses: peter-evans/create-pull-request@v7
@@ -58,3 +61,4 @@ jobs:
             data/check-status.json
             data/snapshots/**
             data/changelog.json
+            data/apps.json
