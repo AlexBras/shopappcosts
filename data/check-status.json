@@ -13,13 +13,15 @@
     },
     "yotpo": {
       "lastAttempt": "2026-10-25",
-      "ok": true,
-      "confirmed": "2026-10-25"
+      "ok": false,
+      "confirmed": "2026-10-25",
+      "error": "HTTP 429"
     },
     "klaviyo": {
       "lastAttempt": "2026-10-25",
-      "ok": true,
-      "confirmed": "2026-10-25"
+      "ok": false,
+      "confirmed": "2026-10-25",
+      "error": "HTTP 429"
     },
     "omnisend": {
       "lastAttempt": "2026-10-25",
@@ -43,18 +45,21 @@
     },
     "weglot": {
       "lastAttempt": "2026-10-25",
-      "ok": true,
-      "confirmed": "2026-10-25"
+      "ok": false,
+      "confirmed": "2026-10-25",
+      "error": "HTTP 429"
     },
     "langify": {
       "lastAttempt": "2026-10-25",
-      "ok": true,
-      "confirmed": "2026-10-25"
+      "ok": false,
+      "confirmed": "2026-10-25",
+      "error": "HTTP 429"
     },
     "translate": {
       "lastAttempt": "2026-10-25",
-      "ok": true,
-      "confirmed": "2026-10-25"
+      "ok": false,
+      "confirmed": "2026-10-25",
+      "error": "HTTP 429"
     }
   }
 }
