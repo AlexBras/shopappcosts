@@ -1,65 +1,60 @@
 {
-  "lastRun": "2026-10-25",
+  "lastRun": "2026-10-26",
   "apps": {
     "judgeme": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "loox": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "yotpo": {
-      "lastAttempt": "2026-10-25",
-      "ok": false,
-      "confirmed": "2026-10-25",
-      "error": "HTTP 429"
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     },
     "klaviyo": {
-      "lastAttempt": "2026-10-25",
-      "ok": false,
-      "confirmed": "2026-10-25",
-      "error": "HTTP 429"
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     },
     "omnisend": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "shopifyemail": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "recharge": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "seal": {
-      "lastAttempt": "2026-10-25",
+      "lastAttempt": "2026-10-26",
       "ok": true,
-      "confirmed": "2026-10-25"
+      "confirmed": "2026-10-26"
     },
     "weglot": {
-      "lastAttempt": "2026-10-25",
-      "ok": false,
-      "confirmed": "2026-10-25",
-      "error": "HTTP 429"
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     },
     "langify": {
-      "lastAttempt": "2026-10-25",
-      "ok": false,
-      "confirmed": "2026-10-25",
-      "error": "HTTP 429"
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     },
     "translate": {
-      "lastAttempt": "2026-10-25",
-      "ok": false,
-      "confirmed": "2026-10-25",
-      "error": "HTTP 429"
+      "lastAttempt": "2026-10-26",
+      "ok": true,
+      "confirmed": "2026-10-26"
     }
   }
 }
