@@ -118,23 +118,20 @@
       why: extra ? `10,000 free, then about $1 per 1,000: ${Math.ceil(extra / 1000)} × $1 (rate “starts at”).` : "Under 10,000 emails: free." });
 
     /* Subscriptions */
-    const rEntry = P("recharge", "Entry plan");
     if (v.subs === 0) {
-      out.subscriptions.push({ id: "seal", cost: 0, why: "No subscribers yet." }, { id: "recharge", cost: rEntry, why: "Entry plan." });
+      out.subscriptions.push({ id: "seal", cost: 0, why: "No subscribers yet." }, { id: "recharge", cost: P("recharge", "Starter"), why: "Starter plan, before any renewal fees." });
     } else {
       const s = v.subs <= 50 ? [0, "Free plan"] : v.subs <= 100 ? [P("seal", "Supersale"), "Supersale"] : v.subs <= 250 ? [P("seal", "Rising Star"), "Rising Star"] : v.subs <= 500 ? [P("seal", "Legend"), "Legend"] : null;
       out.subscriptions.push(s
         ? { id: "seal", cost: s[0], why: `${s[1]}, ${n(v.subs)} subscribers, no transaction fee.` }
         : { id: "seal", cost: null, why: "Above 500 subscribers: larger plans exist, prices not published." });
-      if (v.subs <= 50) out.subscriptions.push({ id: "recharge", cost: rEntry, why: "Entry plan: no transaction fee for the first 50 subscribers." });
-      else {
-        const rStarter = P("recharge", "Starter"), rPlus = P("recharge", "Plus");
-        const fee = (r, f) => v.subs * (v.aov * r + f);
-        const st = rStarter + fee(0.0149, 0.19), pl = rPlus + fee(0.0134, 0.19);
-        const starter = st <= pl;
-        out.subscriptions.push({ id: "recharge", cost: Math.min(st, pl),
-          why: `${starter ? `Starter: ${usd(rStarter)}` : `Plus: ${usd(rPlus)}`} + ${n(v.subs)} renewals × (${starter ? "1.49" : "1.34"}% of ${usd2(v.aov)} + $0.19) = ${usd2(starter ? fee(0.0149, 0.19) : fee(0.0134, 0.19))} in fees.` });
-      }
+      /* Recharge since Nov 2026: Starter $149 + 1.50% + $0.20, Scale $499 + 1.25% + $0.20 per transaction. */
+      const rStarter = P("recharge", "Starter"), rScale = P("recharge", "Scale");
+      const fee = (r, f) => v.subs * (v.aov * r + f);
+      const st = rStarter + fee(0.015, 0.2), sc = rScale + fee(0.0125, 0.2);
+      const starter = st <= sc;
+      out.subscriptions.push({ id: "recharge", cost: Math.min(st, sc),
+        why: `${starter ? `Starter: ${usd(rStarter)}` : `Scale: ${usd(rScale)}`} + ${n(v.subs)} renewals × (${starter ? "1.50" : "1.25"}% of ${usd2(v.aov)} + $0.20) = ${usd2(starter ? fee(0.015, 0.2) : fee(0.0125, 0.2))} in fees.` });
     }
 
     /* Translation */
