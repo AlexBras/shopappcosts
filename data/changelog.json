@@ -1,5 +1,12 @@
 [
   {
+    "date": "2026-11-02",
+    "app": "recharge",
+    "title": "Recharge: Starter rises to $149/month, Plus becomes Scale, $25 entry plan removed",
+    "body": "Starter went from $99 + 1.49% + 19¢ to $149 + 1.50% + 20¢ per transaction. Plus ($499) is now called Scale, at 1.25% + 20¢ instead of 1.34% + 19¢. The $25 plan with no fees for the first 50 subscribers is no longer listed. Confirmed on two daily checks (2 and 3 November).",
+    "source": "Shopify App Store listing, automatic daily check"
+  },
+  {
     "date": "2026-10-26",
     "app": "translate",
     "title": "Translate & Adapt: free automatic translation now covers up to 8 languages in select countries",
