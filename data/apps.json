@@ -59,9 +59,9 @@
     "watch": null,
     "source": "Shopify App Store listing",
     "affiliate": {
-      "status": "program",
-      "program": "Loox partner program (rate not published)",
-      "url": null
+      "status": "active",
+      "program": "Loox partner program: 20% for 12 months, 30-day extended trial",
+      "url": "https://loox.io/app/shopappcosts"
     }
   },
   {
