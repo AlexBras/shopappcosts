@@ -1,6 +1,6 @@
 {
   "url": "https://apps.shopify.com/translate-my-store",
-  "since": "2026-10-26",
+  "since": "2026-11-08",
   "lines": [
     "Choose the plan that best fits your business.",
     "Free",
@@ -11,7 +11,7 @@
     "3,000 AI words a month",
     "Unlimited manual translation",
     "Language and currency switcher",
-    "Works with Shopify Flow and Sidekick",
+    "AI assistant, Shopify Flow, Sidekick",
     "Manual backup and restore",
     "Basic",
     "$9.99",
