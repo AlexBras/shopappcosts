@@ -82,7 +82,9 @@ ${[...known, ...unknown].map(r => card(r, best)).join("")}
 <p class="fine">Prices in USD from each official Shopify App Store listing, excluding taxes. “Starting price” means the vendor publishes only a minimum at your size. <a href="${cat.url}">All ${esc(cat.title.toLowerCase())}</a> · <a href="${meta.method}">how we calculate</a></p>`;
     const p = new URLSearchParams({ cat: cat.id });
     cat.keys.forEach(k => p.set(k, v[k]));
-    history.replaceState(null, "", "?" + p.toString() + location.hash);
+    /* Only put numbers in the address once the visitor has changed something (or arrived with numbers), so search engines see one clean URL. */
+    if (location.search || render.used) history.replaceState(null, "", "?" + p.toString() + location.hash);
+    render.used = true;
   }
 
   drawFields();

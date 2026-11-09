@@ -154,6 +154,7 @@ ${(site.verificationMeta || []).map(m => `<meta name="${esc(m.name)}" ${m.value 
 ${ld.map(o => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, "\\u003c")}</script>`).join("\n")}
 </head>
 <body>
+<!--email_off-->
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar"><div class="wrap">
   ${logo}
@@ -173,6 +174,7 @@ ${body}
   <p>Prices in USD as shown on the Shopify App Store listings, excluding taxes. Last checked ${fmtDate(site.lastChecked)}.</p>
 </div></footer>
 ${calc ? `<script src="${ASSET["costs.js"]}" defer></script><script src="${ASSET["calc.js"]}" defer></script>` : ""}
+<!--email_on-->
 </body>
 </html>
 `;
