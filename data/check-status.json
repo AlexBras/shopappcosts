@@ -1,165 +1,165 @@
 {
-  "lastRun": "2026-11-03",
+  "lastRun": "2026-11-08",
   "apps": {
     "judgeme": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "loox": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "yotpo": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "klaviyo": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "omnisend": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "shopifyemail": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "recharge": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-01"
+      "confirmed": "2026-11-08"
     },
     "seal": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "weglot": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "langify": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "translate": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "okendo": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "stamped": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "mailchimp": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "appstle": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "loop": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "bold": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "langshop": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "transcy": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
       "confirmed": "2026-11-03"
     },
     "hextom": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
       "confirmed": "2026-11-03"
     },
     "smile": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "loyaltylion": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "growave": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "reconvert": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "fbt": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
       "confirmed": "2026-11-03"
     },
     "zipify": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "pagefly": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "gempages": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "shogun": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "pluginseo": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "searchpie": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     },
     "avada": {
-      "lastAttempt": "2026-11-03",
+      "lastAttempt": "2026-11-08",
       "ok": true,
-      "confirmed": "2026-11-03"
+      "confirmed": "2026-11-08"
     }
   }
 }
