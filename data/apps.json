@@ -490,7 +490,7 @@
     "cat": "subscriptions",
     "rating": "5.0 · 796 reviews",
     "listing": "https://apps.shopify.com/loop-subscriptions",
-    "checked": "2026-10-27",
+    "checked": "2026-11-10",
     "plans": [
       {
         "name": "Free Forever",
@@ -503,7 +503,7 @@
       {
         "name": "Starter",
         "price": 99,
-        "limits": "+ 1.0% per transaction. 14-day trial",
+        "limits": "+ 1.0% per transaction (+ 15¢ per loyalty order). 14-day trial",
         "fits": {},
         "fee": {
           "pct": 1
@@ -512,7 +512,7 @@
       {
         "name": "Pro",
         "price": 399,
-        "limits": "+ 0.75% per transaction; dedicated CSM",
+        "limits": "+ 0.75% per transaction (+ 10¢ per loyalty order); dedicated CSM",
         "fits": {},
         "fee": {
           "pct": 0.75
@@ -1367,7 +1367,7 @@
     "cat": "seo",
     "rating": "4.9 · 2,453 reviews",
     "listing": "https://apps.shopify.com/seo-booster",
-    "checked": "2026-10-27",
+    "checked": "2026-11-10",
     "plans": [
       {
         "name": "Starter",
@@ -1386,7 +1386,7 @@
       }
     ],
     "verdict": "A free plan that already covers schema, sitemaps and image compression.",
-    "watch": null,
+    "watch": "Black Friday 2026: Premium and Enterprise are half price for the first 3 months ($19.50 and $49.50), then $39 and $99.",
     "source": "Shopify App Store listing",
     "affiliate": {
       "status": "to-check",

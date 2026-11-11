@@ -1,16 +1,9 @@
 [
   {
     "date": "2026-11-10",
-    "app": "searchpie",
-    "title": "SearchPie: pricing changed on the listing",
-    "body": "Before: $39 · or $374.40/year and save 20% · $99 · or $950.40/year and save 20%. Now: $19.50 · Start at $19.5 in your first 3 months, then $39/month. Limited Black Friday offer · $49.50 · Start at $49.5 in your first 3 months, then $99/month. Limited Black Friday offer.",
-    "source": "Shopify App Store listing, automatic daily check"
-  },
-  {
-    "date": "2026-11-10",
     "app": "loop",
-    "title": "Loop: pricing changed on the listing",
-    "body": "Before: 1.0% + 0¢ per transaction · Fixed & build your own custom bundles · One-click checkout links (with tracking) · Ready-to-use product widget templates · Branded customer portal with upsell · Smart dunning management with 15 retries …. Now: 1% transaction fee + 15¢ per loyalty order · Native loyalty and referral programs · Build-your-own and preset bundles · Advanced payment recovery campaigns · Smart cancellation flows and winbacks · Branded customer portal with upsells ….",
+    "title": "Loop adds a small fee on loyalty orders",
+    "body": "Subscription prices are unchanged (Starter $99 + 1%, Pro $399 + 0.75%). Loop now also charges 15¢ (Starter) or 10¢ (Pro) per order placed through its new built-in loyalty program.",
     "source": "Shopify App Store listing, automatic daily check"
   },
   {
